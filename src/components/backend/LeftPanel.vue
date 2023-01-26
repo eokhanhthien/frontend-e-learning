@@ -1,8 +1,8 @@
 <template>
       <aside id="left-panel" class="left-panel">
         <div class="mt-2 mb-2 text-center"><strong>Quản lý</strong></div>
-        <div class="tab-menu"><router-link to ="/language" id="tab-menu"> <i class="menu-icon fa fa-laptop"></i>Ngôn ngữ lập trình </router-link></div>          
-        <div class="tab-menu"><router-link to ="/course" id="tab-menu"><i class="menu-icon fa fa-laptop"></i>Khóa học </router-link></div>
+        <div class="tab-menu"><router-link to ="/language" id="tab-menu"> Ngôn ngữ lập trình </router-link></div>          
+        <div class="tab-menu"><router-link to ="/course" id="tab-menu"> Khóa học </router-link></div>
            
     </aside>
 </template>
@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .vue-school-active-link{
     color: rgb(32, 158, 1) !important;
     background-color: rgb(241, 241, 241) !important;
@@ -34,5 +34,6 @@ a#tab-menu {
     text-align: start;
     font-size: 17px;
     padding-left: 30px;
+    text-decoration: none;
 }
 </style>
