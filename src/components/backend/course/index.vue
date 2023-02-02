@@ -16,90 +16,33 @@
                                             <thead>
                                                 <tr>
                                                     <th class="serial">#</th>
-                                                    <th class="avatar">Avatar</th>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Product</th>
-                                                    <th>Quantity</th>
-                                                    <th>Status</th>
+                                                    <th class="avatar">Hình ảnh</th>
+                                                    <th>Tên khóa học</th>
+                                                    <th>Ngôn ngữ</th>
+                                                    <th>Trình độ</th>
+                                                    <th>Mô tả</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td class="serial">1.</td>
+                                                <tr v-for="(course,index) in courses" v-bind:key="course._id">
+                                                    <td class="serial">{{index+1}}</td>
                                                     <td class="avatar">
                                                         <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg" alt=""></a>
+                                                            <img :src="require('../../../assets/images/'+course.image )" aspect-ratio="2.75" >
+
                                                         </div>
                                                     </td>
-                                                    <td> #5469 </td>
-                                                    <td>  <span class="name">Louis Stanley</span> </td>
-                                                    <td> <span class="product">iMax</span> </td>
-                                                    <td><span class="count">231</span></td>
+                                                    <td> {{ course.name }} </td>
+                                                    <td>  <span class="name">{{ course.name_language }}</span> </td>
+                                                    <td> <span class="product">{{ course.level }}</span> </td>
+                                                    <td><span class="count">{{ course.description }}</span></td>
                                                     <td>
-                                                        <span class="badge badge-complete">Complete</span>
+                                                        <span class="badge badge-warning"><router-link :to="'course/edit/' + course._id">Edit</router-link> </span>
+                                                        <span @click ="handleDeleteCourse(course._id)" class="badge badge-complete ml-3">Delete</span>
                                                     </td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="serial">2.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="images/avatar/2.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5468 </td>
-                                                    <td>  <span class="name">Gregory Dixon</span> </td>
-                                                    <td> <span class="product">iPad</span> </td>
-                                                    <td><span class="count">250</span></td>
-                                                    <td>
-                                                        <span class="badge badge-complete">Complete</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="serial">3.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="images/avatar/3.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5467 </td>
-                                                    <td>  <span class="name">Catherine Dixon</span> </td>
-                                                    <td> <span class="product">SSD</span> </td>
-                                                    <td><span class="count">250</span></td>
-                                                    <td>
-                                                        <span class="badge badge-complete">Complete</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="serial">4.</td>
-                                                    <td class="avatar">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="images/avatar/4.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5466 </td>
-                                                    <td>  <span class="name">Mary Silva</span> </td>
-                                                    <td> <span class="product">Magic Mouse</span> </td>
-                                                    <td><span class="count">250</span></td>
-                                                    <td>
-                                                        <span class="badge badge-pending">Pending</span>
-                                                    </td>
-                                                </tr>
-                                                <tr class=" pb-0">
-                                                    <td class="serial">5.</td>
-                                                    <td class="avatar pb-0">
-                                                        <div class="round-img">
-                                                            <a href="#"><img class="rounded-circle" src="images/avatar/6.jpg" alt=""></a>
-                                                        </div>
-                                                    </td>
-                                                    <td> #5465 </td>
-                                                    <td>  <span class="name">Johnny Stephens</span> </td>
-                                                    <td> <span class="product">Monitor</span> </td>
-                                                    <td><span class="count">250</span></td>
-                                                    <td>
-                                                        <span class="badge badge-complete">Complete</span>
-                                                    </td>
-                                                </tr>
+                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -116,8 +59,30 @@
 
 </template>
 
-<script>
-export default {
+<script setup>
+import { ref, onMounted,inject } from 'vue'
+import courseApi from '@/api/courseApi';
+const toast = inject('toast');
+
+const courses = ref([]);
+onMounted(() => {
+    (async function () {
+        const res = await courseApi.getAll();
+        // console.log(res.data.data)
+        courses.value = res.data.data;
+        console.log(courses.value)
+
+    })()
+})
+
+async function handleDeleteCourse(id){
+    const res = await courseApi.delete({id: id})
+    if(res){
+        // location.reload()
+        const res = await courseApi.getAll();
+        courses.value = res.data.data;
+        toast.error('Xóa ngôn ngữ thành công');
+    }   
 
 }
 </script>
@@ -144,5 +109,10 @@ button.btn-add {
 .btn-add a{
     color: white;
     text-decoration: none;
+}
+.table-stats table td {
+    font-weight: 500;
+    text-transform: inherit;
+    vertical-align: middle;
 }
 </style>

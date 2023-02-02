@@ -21,7 +21,7 @@
 
                                     <div>
                                         <button @click="handleAddLanguage" id="payment-button"
-                                            class="btn btn-lg btn-info btn-block">
+                                            class="btn btn-lg btn-info ">
                                             <span id="payment-button-amount">Thêm</span>
                                         </button>
                                     </div>
@@ -44,7 +44,7 @@ import { ref ,inject} from 'vue';
 import { useRouter } from 'vue-router'
 
 console.log(inject('axios'));
-// const axios = inject('axios')
+// const axios = inject('axios')    
 
 const inputLanguage = ref('')
 

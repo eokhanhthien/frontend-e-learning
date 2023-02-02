@@ -23,7 +23,7 @@
                                             <thead>
                                                 <tr>
                                                     <th class="serial">#</th>
-                                                    <th>ID</th>
+                                                    <!-- <th>ID</th> -->
                                                     <th>Tên</th>
                                                     <th>Ngày tạo</th>
                                                     <th>Ngày sửa</th>
@@ -33,7 +33,7 @@
                                             <tbody>
                                                 <tr v-for="(language,index) in languages" v-bind:key="language._id">
                                                     <td class="serial">{{index + 1}}</td>
-                                                    <td> {{ language._id }} </td>
+                                                    <!-- <td> {{ language._id }} </td> -->
                                                     <td> <span class="name">{{ language.name }}</span> </td>
                                                     <td> <span class="name">{{ language.createdAt }}</span> </td>
                                                     <td> <span class="name">{{ language.updatedAt }}</span> </td>

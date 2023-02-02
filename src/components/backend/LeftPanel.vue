@@ -3,6 +3,7 @@
         <div class="mt-2 mb-2 text-center"><strong>Quản lý</strong></div>
         <div class="tab-menu"><router-link to ="/language" id="tab-menu"> Ngôn ngữ lập trình </router-link></div>          
         <div class="tab-menu"><router-link to ="/course" id="tab-menu"> Khóa học </router-link></div>
+        <div class="tab-menu"><router-link to ="/lab" id="tab-menu"> Bài học </router-link></div>
            
     </aside>
 </template>

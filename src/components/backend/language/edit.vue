@@ -21,7 +21,7 @@
 
                                     <div>
                                         <button @click="handleEditLanguage()" id="payment-button"
-                                            class="btn btn-lg btn-info btn-block">
+                                            class="btn btn-lg btn-info ">
                                             <span id="payment-button-amount">Sửa</span>
                                         </button>
                                     </div>
