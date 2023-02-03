@@ -17,6 +17,7 @@ import LanguageEdit from "../components/backend/language/edit.vue"
 
 import LabIndex from "../components/backend/lab/index.vue"
 import LabAdd from "../components/backend/lab/add.vue"
+import LabEdit from "../components/backend/lab/edit.vue"
 
 const routes = [
     // Frontend

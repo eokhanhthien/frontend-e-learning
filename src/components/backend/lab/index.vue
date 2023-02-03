@@ -17,10 +17,10 @@
                                                   <tr>
                                                       <th class="serial">#</th>
                                                       <!-- <th class="avatar">Hình ảnh</th> -->
-                                                      <th>Tên khóa học</th>
+                                                      <th>Tên bài học</th>
                                                       <th>Khóa học</th>
                                                       <!-- <th>Nội dung</th> -->
-                                                      <th>Mô tả</th>
+                                                      <!-- <th>Mô tả</th> -->
                                                       <th>Action</th>
                                                   </tr>
                                               </thead>
@@ -36,9 +36,9 @@
                                                       <td> {{ course.name }} </td>
                                                       <td>  <span class="name">{{ course.name_course }}</span> </td>
                                                       <!-- <td> <span class="product">{{ course.content }}</span> </td> -->
-                                                      <td><span class="count">{{ course.description }}</span></td>
+                                                      <!-- <td><span class="count">{{ course.description }}</span></td> -->
                                                       <td>
-                                                          <span class="badge badge-warning"><router-link :to="'course/edit/' + course._id">Edit</router-link> </span>
+                                                          <span class="badge badge-warning"><router-link :to="'lab/edit/' + course._id">Edit</router-link> </span>
                                                           <span @click ="handleDeleteCourse(course._id)" class="badge badge-complete ml-3">Delete</span>
                                                       </td>
                                                   </tr>

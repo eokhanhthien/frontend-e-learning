@@ -28,6 +28,7 @@ const editorConfig = ref({
 })
 
 watch(editorData, ()=>{
+    console.log(editorData.value);
     emit('update:modelValue', editorData.value)
 })
 

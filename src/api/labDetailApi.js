@@ -1,14 +1,11 @@
 import axios from 'axios';
 
-const labApi = {
+const labDetailApi = {
     getAll: async () => {
         return axios.get('http://localhost:3000/api/lab')
     },
     getRow: async ({ id }) => {
         return axios.get('http://localhost:3000/api/lab/' + id)
-    },
-    getRowDetail: async ({ id }) => {
-        return axios.get('http://localhost:3000/api/labdetail/' + id)
     },
     create: async (post) => {
         // const arr = JSON.stringify(Object.fromEntries(post));
@@ -31,4 +28,4 @@ const labApi = {
 
 }
 
-export default labApi
+export default labDetailApi

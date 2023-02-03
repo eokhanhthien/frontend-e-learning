@@ -35,8 +35,8 @@
                                                     <td class="serial">{{index + 1}}</td>
                                                     <!-- <td> {{ language._id }} </td> -->
                                                     <td> <span class="name">{{ language.name }}</span> </td>
-                                                    <td> <span class="name">{{ language.createdAt }}</span> </td>
-                                                    <td> <span class="name">{{ language.updatedAt }}</span> </td>
+                                                    <td> <span class="name">{{ convertDate(language.createdAt) }}</span> </td>
+                                                    <td> <span class="name">{{  convertDate(language.updatedAt) }}</span> </td>
                                                     <td>
                                                         <span class="badge badge-warning"><router-link :to="'language/edit/' + language._id">Edit</router-link> </span>
                                                         <span @click ="handleDeleteLanguage(language._id)" class="badge badge-complete ml-3">Delete</span>
@@ -95,6 +95,13 @@ async function handleDeleteLanguage(id){
 
 
 console.log(route.query.status);
+
+function convertDate(value) {
+    const date = new Date(value);
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    const result = date.toLocaleDateString('vi-VN', options).replace(/\//g, '-');
+    return result
+}
 
 </script>
 <!-- <script>
