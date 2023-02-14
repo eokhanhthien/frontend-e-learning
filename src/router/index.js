@@ -19,6 +19,34 @@ import LabIndex from "../components/backend/lab/index.vue"
 import LabAdd from "../components/backend/lab/add.vue"
 import LabEdit from "../components/backend/lab/edit.vue"
 
+import Login from "../components//backend/authen/login.vue"
+import Signup from "../components/backend/authen/signup.vue"
+
+const requireAuth = (to, from, next) => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      // next({
+      //   path: '/login',
+      // });
+      window.location = "/login"
+    } else {
+      next();
+    }
+  };
+
+  const requireAuthLogin = (to, from, next) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // next({
+      //   path: '/login',
+      // });
+      window.location = "/language"
+    } else {
+      next();
+    }
+  };
+
+
 const routes = [
     // Frontend
     { path: '/', component: <UserLayout><Home /></UserLayout>,  name: "Home"  ,props: true,},
@@ -28,17 +56,20 @@ const routes = [
 
 
     // Backend
-    { path: '/course', component: <AdminLayout><CourseIndex /></AdminLayout> ,  name:  "CourseIndex" ,props: true,},
-    { path: '/course/add', component: <AdminLayout><CourseAdd /></AdminLayout> ,  name: "CourseAdd"  ,props: true,},
-    { path: '/course/edit/:id', component: <AdminLayout><CourseEdit /></AdminLayout> ,  name:  "CourseEdit" ,props: true,},
+    { path: '/course', component: <AdminLayout><CourseIndex /></AdminLayout> ,  name:  "CourseIndex" ,props: true,beforeEnter: requireAuth},
+    { path: '/course/add', component: <AdminLayout><CourseAdd /></AdminLayout> ,  name: "CourseAdd"  ,props: true,beforeEnter: requireAuth},
+    { path: '/course/edit/:id', component: <AdminLayout><CourseEdit /></AdminLayout> ,  name:  "CourseEdit" ,props: true,beforeEnter: requireAuth},
 
-    { path: '/language', component: <AdminLayout><LanguageIndex /></AdminLayout> ,  name: "LanguageIndex"  ,props: true,},
-    { path: '/language/add', component: <AdminLayout><LanguageAdd /></AdminLayout> ,  name:  "LanguageAdd" ,props: true,},
-    { path: '/language/edit/:id', component: <AdminLayout><LanguageEdit /></AdminLayout> ,  name:  "LanguageEdit" ,props: true,},
+    { path: '/language', component: <AdminLayout><LanguageIndex /></AdminLayout> ,  name: "LanguageIndex"  ,props: true,beforeEnter: requireAuth},
+    { path: '/language/add', component: <AdminLayout><LanguageAdd /></AdminLayout> ,  name:  "LanguageAdd" ,props: true,beforeEnter: requireAuth},
+    { path: '/language/edit/:id', component: <AdminLayout><LanguageEdit /></AdminLayout> ,  name:  "LanguageEdit" ,props: true,beforeEnter: requireAuth},
 
-    { path: '/lab', component: <AdminLayout><LabIndex /></AdminLayout> ,  name: "LabIndex"  ,props: true,},
-    { path: '/lab/add', component: <AdminLayout><LabAdd /></AdminLayout> ,  name:  "LabAdd" ,props: true,},
-    { path: '/lab/edit/:id', component: <AdminLayout><LabEdit /></AdminLayout> ,  name:  "LabEdit" ,props: true,},
+    { path: '/lab', component: <AdminLayout><LabIndex /></AdminLayout> ,  name: "LabIndex"  ,props: true,beforeEnter: requireAuth},
+    { path: '/lab/add', component: <AdminLayout><LabAdd /></AdminLayout> ,  name:  "LabAdd" ,props: true,beforeEnter: requireAuth},
+    { path: '/lab/edit/:id', component: <AdminLayout><LabEdit /></AdminLayout> ,  name:  "LabEdit" ,props: true,beforeEnter: requireAuth},
+
+    { path: '/login', component: <Login /> ,  name:  "Login" ,props: true,beforeEnter: requireAuthLogin},
+    { path: '/register', component: <Signup /> ,  name:  "Signup" ,props: true,beforeEnter: requireAuthLogin},
 ]
 
 const router = createRouter({

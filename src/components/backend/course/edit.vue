@@ -37,18 +37,25 @@
 
                                         <div class="form-group">
                                             <label for="cc-payment" class="control-label mb-1">Tên khóa học</label>
-                                            <input v-model="name_course" id="cc-payment" name="cc-payment" type="text"
+                                            <input v-model="post.name" id="cc-payment" name="cc-payment" type="text"
                                                 class="form-control" aria-required="true" aria-invalid="false">
                                         </div>
+                                         <!-- <p>{{ post.name }}</p> -->
+
+                                        <div for="cc-payment" class="control-label mb-1">Ảnh đại diện</div>
 
                                         <input type="file" name="image" ref="image" @change="selectFile">
+                                        <!-- <p>{{ post.image }}</p> -->
+                                        <hr>
+                                        <img v-if="post.image" :src="require('../../../assets/images/'+post.image)" style="width: 120px; border: 1px solid #ccc;margin: 10px 4px 10px 0;" >
+                                       
 
-                                        <div class="form-group">
+                                        <div class="form-group mt-3">
                                             <div class=""><label for="select" class=" form-control-label">Cấp độ khóa
                                                     học</label>
                                             </div>
                                             <div class="">
-                                                <select name="select" id="select" class="form-control" v-model="level_course"
+                                                <select name="select" id="select" class="form-control" v-model="post.level"
                                                     @change="onChange1($event)">
                                                     <option value="">Chọn cấp độ</option>
                                                     <option v-bind:value="'basic'">Căn bản</option>
@@ -59,7 +66,7 @@
 
                                         <div class="form-group">
                                             <label for="cc-description" class="control-label mb-1">Mô tả</label>
-                                            <textarea v-model="description_course" id="cc-description" name="cc-payment"
+                                            <textarea v-model="post.description" id="cc-description" name="cc-payment"
                                                 type="text" class="form-control" aria-required="true"
                                                 aria-invalid="false"> </textarea>
                                         </div>
@@ -90,38 +97,37 @@ var FormData = require('form-data');
 
 
 const languages = ref([]);
-const id_language = ref('');
-const name_language = ref('');
-const name_course = ref('');
-const description_course = ref('');
-const level_course = ref('');
+
 const selected = ref({
   id: "",
   name: '',
 });
 const file = ref('');
-const image = ref('');
-const old_image = ref('');
+
+
+const post = ref({
+    id_language : '',
+    name_language : '',
+    name : '',
+    description : '',
+    level : '',
+    image: '',
+})
 
 const id = ref(useRoute().params.id);
 
 onBeforeMount(() => {
     (async function () {
 
-        // const course = await courseApi.getRow({ id: id.value });
-        
-        // console.log(course.data.data)
-        // name_language.value = course.data.data.name_language
-        // id_language.value = course.data.data.id_language
-        // name_course.value = course.data.data.name
-        // description_course.value = course.data.data.description
-        // level_course.value = course.data.data.level
-        // file.value = course.data.data.image
+        const course = await courseApi.getRow({ id: id.value });
+        post.value = course.data.data;
+        console.log(course.data.data)
+        console.log(post.value)
 
-        // // Select option có 2 thuộc tính
-        // selected.value.id = course.data.data.id_language 
-        // selected.value.name = course.data.data.name_language
-        // // console.log(course.data.data.level_course)
+        // Select option có 2 thuộc tính
+        selected.value.id = course.data.data.id_language 
+        selected.value.name = course.data.data.name_language
+
     })()
 
 })
@@ -130,72 +136,36 @@ onMounted(() => {
     (async function () {
         const res = await languageApi.getAll();
         // console.log(res.data.data)
-        languages.value = res.data.data;
-       
-
-
-        const course = await courseApi.getRow({ id: id.value });
-        
-        // console.log(course.data.data)
-        name_language.value = course.data.data.name_language
-        id_language.value = course.data.data.id_language
-        name_course.value = course.data.data.name
-        description_course.value = course.data.data.description
-        level_course.value = course.data.data.level
-        file.value = course.data.data.image
-        old_image.value = course.data.data.image
-
-        // Select option có 2 thuộc tính
-        selected.value.id = course.data.data.id_language 
-        selected.value.name = course.data.data.name_language
+        languages.value = res.data.data;   
     })()
 
 })
 
 function onChange() {
-    id_language.value = selected.value.id;
-    name_language.value = selected.value.name;
+    post.value.id_language = selected.value.id;
+    post.value.name_language = selected.value.name;
     // console.log(id_language.value)
-    console.log(selected.value)
+    // console.log(selected.value)
 }
 function onChange1(event) {
-    level_course.value = event.target.value;
-    console.log(level_course.value)
+    post.value.level = event.target.value;
+    console.log(post.value.level)
 }
 
 const router = useRouter()
 const toast = inject('toast');
-// async function handleAddCourse() {
-//     const res = await courseApi.create({
-//         name: name_course.value,
-//         id_language: id_language.value,
-//         name_language: name_language.value,
-//         level: level_course.value,
-//         description: description_course.value,
-//         image: image.value
-//     })
-//     if (res) {
-//         // window.history.back();
-//         router.push({ path: '/course' }).then(() => {
-//             toast.success('Thêm khóa học thành công');
-//         })
-//     }
-// }
+
 
 async function submitForm() {
     const formData = new FormData();
     formData.append("image", file.value);
-    formData.append("old_image", old_image.value);
-    formData.append("name", name_course.value);
-    formData.append("name_language", name_language.value);
-    formData.append("description", description_course.value);
-    formData.append("id_language", id_language.value);
-    formData.append("level", level_course.value);
+    formData.append("old_image", post.value.image);
+    formData.append("name", post.value.name);
+    formData.append("name_language", post.value.name_language);
+    formData.append("description", post.value.description);
+    formData.append("id_language", post.value.id_language);
+    formData.append("level", post.value.level);
     console.log(JSON.stringify(Object.fromEntries(formData)));
-    // for (var pair of formData.entries()) {
-    // console.log(pair[0]+ ', ' + pair[1]); 
-    // }
-    // await axios.post('http://localhost:3000/api/course',formData)
 
     await axios.put('http://localhost:3000/api/course/'+id.value , formData).then(() => {
             router.push({ path: '/course' }).then(() => {
@@ -215,7 +185,6 @@ function selectFile(e) {
     const files = e.target.files[0]
     file.value = files;
     console.log(file.value);
-    console.log(old_image.value);
 }
 
 

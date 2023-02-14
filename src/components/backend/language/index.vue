@@ -65,7 +65,7 @@
 import { ref, onMounted, inject } from 'vue'
 import languageApi from '@/api/languageApi';
 
-import { useRoute } from 'vue-router';
+// import { useRoute } from 'vue-router';
 
 
 const languages = ref([]);
@@ -80,7 +80,7 @@ onMounted(() => {
 })
 
 
-const route = useRoute();
+// const route = useRoute();
 const toast = inject('toast');
 async function handleDeleteLanguage(id){
     const res = await languageApi.delete({id: id})
@@ -94,7 +94,7 @@ async function handleDeleteLanguage(id){
 }
 
 
-console.log(route.query.status);
+// console.log(route.query.status);
 
 function convertDate(value) {
     const date = new Date(value);

@@ -20,41 +20,51 @@
 
                                         <form ref="form" @submit.prevent="submitForm" enctype="multipart/form-data">
                                             <div class="form-group">
-                                                <div class=""><label for="select" class=" form-control-label">Khóa học</label>
+                                                <div class=""><label for="select" class=" form-control-label">Khóa
+                                                        học</label>
                                                 </div>
                                                 <div class="">
-                                                <select name="select" id="select" class="form-control"
-                                                    v-model="selected" @change="onChange($event)">
-                                                    <option value="">Chọn khóa học</option>
-                                                    <option  v-for="(language) in languages" v-bind:key="language.name" 
-                                                    v-bind:value="{ id: language._id, name: language.name }" >{{
-                                                            language.name
-                                                        }}</option>
-                                                </select>
+                                                    <select name="select" id="select" class="form-control"
+                                                        v-model="selected" @change="onChange($event)">
+                                                        <option value="">Chọn khóa học</option>
+                                                        <option v-for="(language) in languages"
+                                                            v-bind:key="language.name"
+                                                            v-bind:value="{ id: language._id, name: language.name }">{{
+                                                                language.name
+                                                            }}</option>
+                                                    </select>
                                                 </div>
                                             </div>
-                                           
+
 
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Tên bài học</label>
-                                                <input v-model="name_course" id="cc-payment" name="cc-payment"
+                                                <input v-model="postLab.name" id="cc-payment" name="cc-payment"
                                                     type="text" class="form-control" aria-required="true"
                                                     aria-invalid="false">
                                             </div>
 
                                             <label for="cc-payment" class="control-label mb-1">Nội dung</label>
-                                            <ContentEditor v-if="content" v-model="content" />
-                                           <!-- {{ content }}
+                                            <ContentEditor v-if="postLabDetail.content"
+                                                v-model="postLabDetail.content" />
+                                            <!-- {{ content }}
                                            <input type="text" v-model="content"> -->
 
-                                           <div for="cc-payment" class="control-label mb-1">Hình minh họa</div>
-                                            <input type="file" name="image" ref="image" multiple  @change="selectFile">
+                                            <div for="cc-payment" class="control-label mb-1">Hình minh họa</div>
+                                            <input type="file" name="image" ref="image" multiple @change="selectFile">
 
-
+                                            <div v-if="postLabDetail">
+                                                <div v-if="postLabDetail.image">
+                                                    <img v-for="(image, index) in postLabDetail.image"
+                                                        v-bind:key="index"
+                                                        :src="require('../../../assets/images/' + image)"
+                                                        style="width: 120px; border: 1px solid #ccc;margin: 10px 4px 10px 0;">
+                                                </div>
+                                            </div>
 
                                             <div class="form-group">
                                                 <label for="cc-description" class="control-label mb-1">Mô tả</label>
-                                                <textarea v-model="description_course" id="cc-description"
+                                                <textarea v-model="postLabDetail.description" id="cc-description"
                                                     name="cc-payment" type="text" class="form-control"
                                                     aria-required="true" aria-invalid="false"> </textarea>
                                             </div>
@@ -80,7 +90,7 @@ import { ref, onMounted, inject } from 'vue'
 // import languageApi from '@/api/languageApi';
 import courseApi from '@/api/courseApi';
 import labApi from '@/api/labApi';
-import { useRouter,useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import axios from 'axios';
 
 
@@ -89,20 +99,36 @@ var FormData = require('form-data');
 
 
 const languages = ref([]);
-const id_language = ref('');  //id khóa học
-const name_language = ref('');  //tên khóa học
-const name_course = ref('');    // tên bài học
-const description_course = ref(''); // Mô tả bài học
 
 const selected = ref({
-  id: "",
-  name: '',
+    id: "",
+    name: '',
 });
-const file = ref('');    // Ảnh 
-const image = ref('');
-const old_image = ref('');
 
-const content = ref('');   //Nội dung bài học
+const file = ref('');    // Ảnh 
+
+// const id_language = ref('');  //id khóa học
+// const name_language = ref('');  //tên khóa học
+// const name_course = ref('');    // tên bài học
+// const description_course = ref(''); // Mô tả bài học
+// const content = ref('');   //Nội dung bài học
+
+const postLab = ref({
+    id_course: '',
+    name_course: '',
+    name: '',
+})
+
+const postLabDetail = ref({
+    id_lab: '',
+    content: '',
+    description: '',
+    image: '',
+})
+
+// const old_image = ref('');
+
+
 
 const id = ref(useRoute().params.id);
 
@@ -114,17 +140,21 @@ onMounted(() => {
         console.log(languages.value)
 
         const lab = await labApi.getRow({ id: id.value });
+        postLab.value = lab.data.data;
         const labDetail = await labApi.getRowDetail({ id: id.value });
-        
-        // console.log(labDetail.data.data)
-        name_language.value = lab.data.data.name_course
-        id_language.value = lab.data.data.id_course
-        name_course.value = lab.data.data.name
-        
-        description_course.value = labDetail.data.data.description
-        content.value = labDetail.data.data.content
-        file.value = labDetail.data.data.image
-        old_image.value = labDetail.data.data.image
+        postLabDetail.value = labDetail.data.data;
+
+        console.log(postLab.value)
+        console.log(postLabDetail.value.image)
+
+        // name_language.value = lab.data.data.name_course
+        // id_language.value = lab.data.data.id_course
+        // name_course.value = lab.data.data.name
+
+        // description_course.value = labDetail.data.data.description
+        // content.value = labDetail.data.data.content
+        // file.value = labDetail.data.data.image
+        // old_image.value = labDetail.data.data.image
 
         // Select option có 2 thuộc tính
         selected.value.id = lab.data.data.id_course
@@ -133,35 +163,11 @@ onMounted(() => {
     })()
 })
 
-// onBeforeMount(() => {
 
-//     (async function () {   
-//     const lab = await labApi.getRow({ id: id.value });
-//     const labDetail = await labApi.getRowDetail({ id: id.value });
-        
-//         // console.log(labDetail.data.data)
-//         name_language.value = lab.data.data.name_course
-//         id_language.value = lab.data.data.id_course
-//         name_course.value = lab.data.data.name
-        
-//         description_course.value = labDetail.data.data.description
-//         content.value = labDetail.data.data.content
-//         file.value = labDetail.data.data.image
-//         old_image.value = labDetail.data.data.image
-
-//         // Select option có 2 thuộc tính
-//         selected.value.id = lab.data.data.id_course
-//         selected.value.name = lab.data.data.name_course
-
-//         console.log(content.value)
-//         // console.log(selected.value.id)
-//         // console.log(selected.value.name)
-//     })()
-//     })
 
 function onChange() {
-    id_language.value = selected.value.id;
-    name_language.value = selected.value.name;
+    postLab.value.id_course = selected.value.id;
+    postLab.value.name_course = selected.value.name;
     console.log(selected.value)
     // console.log(name_language.value)
 }
@@ -171,22 +177,23 @@ const toast = inject('toast');
 
 async function submitForm() {
     const formData = new FormData();
-    
+
     for (let index = 0; index < file.value.length; index++) { //NEW ONE
-    formData.append("image", file.value[index] , index);
+        const fileBlob = new Blob([file.value[index]], { type: 'image/jpeg' });
+        formData.append("image", fileBlob, index + 1);
     }
-    // formData.append("image", file.value);
-    formData.append("name", name_course.value);
-    formData.append("name_course", name_language.value);
-    formData.append("description", description_course.value);
-    formData.append("id_course", id_language.value);
-    formData.append("content", content.value);
-   
+    formData.append("old_image", postLabDetail.value.image);
+    formData.append("name", postLab.value.name);
+    formData.append("name_course", postLab.value.name_course);
+    formData.append("description", postLabDetail.value.description);
+    formData.append("id_course", postLab.value.id_course);
+    formData.append("content", postLabDetail.value.content);
+
     console.log(JSON.stringify(Object.fromEntries(formData)));
 
-    await axios.post('http://localhost:3000/api/lab', formData).then(() => {
+    await axios.put('http://localhost:3000/api/lab/' + id.value, formData).then(() => {
         router.push({ path: '/lab' }).then(() => {
-            toast.success('Thêm bài học thành công');
+            toast.success('Sửa bài học thành công');
         })
     })
     // console.log(fileReturn);
@@ -196,7 +203,6 @@ async function submitForm() {
 
 
 function selectFile(e) {
-
     const files = e.target.files
     file.value = files;
     console.log(file.value);

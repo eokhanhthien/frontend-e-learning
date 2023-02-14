@@ -62,6 +62,11 @@ export default {
   background-color: white;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
   padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo-size {
@@ -75,11 +80,11 @@ export default {
 }
 
 .name-logo a {
-  font-size: 22px;
-  line-height: 70px;
-  font-weight: 500;
+  font-size: 24px;
+    line-height: 70px;
+    font-weight: 700;
   color: blue;
-  text-decoration: none;
+  text-decoration: none !important;
 
 }
 
@@ -103,9 +108,31 @@ p.menu-tag-header a {
   color: #4c4c4c;
   cursor: pointer;
   text-decoration: none;
-}
 
+}
+.menu-tag-header{
+  position: relative;
+}
+.menu-tag-header::before {
+    content: "";
+    height: 4px;
+    width: 0%;
+    background-color: blue;
+    display: inherit;
+    position: absolute;
+    border-radius: 4px;
+    bottom: 0;
+    transition: 0.3s;
+}
+.menu-tag-header:hover.menu-tag-header::before{
+  width: 100%;
+}
+.menu-tag-header:hover a{
+  color: blue;
+
+}
 a.vue-school-active-link.router-link-exact-active {
-  color: red;
+  color: blue;
+
 }
 </style>

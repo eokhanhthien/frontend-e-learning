@@ -2,20 +2,20 @@
     <div>
           <div class="content">
               <div class="animated fadeIn">
-                  <button class="btn-add btn btn-primary"> <router-link to ="/lab/add">Thêm khóa học</router-link> </button>
+                  <button class="btn-add btn btn-primary"> <router-link to ="/lab/add">Thêm bài học</router-link> </button>
                   <div class="orders">
                       <div class="row">
                           <div class="col-xl-12">
                               <div class="card">
                                   <div class="card-body">
-                                      <h4 class="box-title">Khóa học  </h4>
+                                      <h4 class="box-title">Bài học  </h4>
                                   </div>
                                   <div class="card-body--">
                                       <div class="table-stats order-table ov-h">
                                           <table class="table ">
                                               <thead>
                                                   <tr>
-                                                      <th class="serial">#</th>
+                                                      <th class="serial">Bài số</th>
                                                       <!-- <th class="avatar">Hình ảnh</th> -->
                                                       <th>Tên bài học</th>
                                                       <th>Khóa học</th>
