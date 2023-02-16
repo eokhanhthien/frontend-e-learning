@@ -85,7 +85,7 @@ import { ref, onMounted, inject } from 'vue'
 import languageApi from '@/api/languageApi';
 // import courseApi from '@/api/courseApi';
 import { useRouter } from 'vue-router'
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 var FormData = require('form-data');
 
 
@@ -153,7 +153,7 @@ async function submitForm() {
     // console.log(pair[0]+ ', ' + pair[1]); 
     // }
     // await axios.post('http://localhost:3000/api/course',formData)
-    await axios.post('http://localhost:3000/api/course', formData).then(() => {
+    await axiosClient.post('http://localhost:3000/api/course', formData).then(() => {
             router.push({ path: '/course' }).then(() => {
             toast.success('Thêm khóa học thành công');
         })

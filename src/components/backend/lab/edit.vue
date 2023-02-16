@@ -91,7 +91,7 @@ import { ref, onMounted, inject } from 'vue'
 import courseApi from '@/api/courseApi';
 import labApi from '@/api/labApi';
 import { useRouter, useRoute } from 'vue-router'
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 
 
 import ContentEditor from './ContentEditor.vue'
@@ -191,7 +191,7 @@ async function submitForm() {
 
     console.log(JSON.stringify(Object.fromEntries(formData)));
 
-    await axios.put('http://localhost:3000/api/lab/' + id.value, formData).then(() => {
+    await axiosClient.put('http://localhost:3000/api/lab/' + id.value, formData).then(() => {
         router.push({ path: '/lab' }).then(() => {
             toast.success('Sửa bài học thành công');
         })

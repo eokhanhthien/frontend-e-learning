@@ -20,23 +20,24 @@
                 <div class="col col-3" v-for="(course,index) in courses" v-bind:key="index">
                     <div class="course-item">
                         <div class="img-size">
-                            <img :src="require('../../assets/images/'+course.image )" aspect-ratio="2.75" >
+                            <img class="thumnail_course" :src="require('../../assets/images/'+course.image )" aspect-ratio="2.75" >
                             <div class="img-size-view">Tham gia</div>
                         </div>
                         <div class="course-info">
                             <div class="course-item-name">{{ course.name }}</div>
                             <p class="course-item-description">{{ course.description }}</p>
                         <div class="course-info-nav">
-                            <p>Object Oriented-Programming in C++</p>
-                            <p>Mo ta khoa hoc</p>
+                            <p> <strong>Tên khóa học: </strong>  {{ course.name }}</p>
+                            <!-- <p> <strong>Mô tả: </strong>  {{ course.description }}</p> -->
+                            <!-- <img class="logo_course" :src="require('../../assets/images/logo_'+course.name_language+'.jpg' )" >  -->
+                            <p> <img src="../../assets/images/language.png" alt=""> <strong>Lĩnh vực: </strong><strong>{{ course.name_language }} </strong> </p>
+                            <p> <img src="../../assets/images/icon_level.png" alt=""> <strong>Cấp độ: </strong>  {{ course.level }}</p>
+                            <p> <img src="../../assets/images/icon_people.png" alt=""> <strong>Đối tượng: </strong> mọi người </p>
+                            <p> <img src="../../assets/images/icon_online.png" alt=""> <strong>Hình thức: </strong> online  </p>
                         </div>
                         </div>
                     </div>
                 </div>
-
-               
-                      
-                       
                 
             </div>
         </div>
@@ -165,6 +166,8 @@ input.search-box {
 .img-size{
     overflow: hidden;
     position: relative;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px; 
 }
 .img-size-view{
     position: absolute;
@@ -225,12 +228,13 @@ img.img-banner {
     padding: 10px 10px;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    overflow: hidden;
 }
 .course-item:hover .course-info-nav{
     left: 0%;
 }
 
-.course-item:hover img{
+.course-item:hover .thumnail_course{
     transform: scale(1.1);
     filter: blur(3px) brightness(60%);
 }
@@ -240,5 +244,10 @@ img.img-banner {
     opacity: 1;
     cursor: pointer;
 }
-
+.img-size-view:hover{
+    color: rgb(146, 206, 255);
+}
+.logo_course{
+    width: 40px;
+}
 </style>

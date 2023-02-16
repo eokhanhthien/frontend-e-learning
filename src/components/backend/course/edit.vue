@@ -92,7 +92,7 @@ import { ref, onMounted, inject , onBeforeMount } from 'vue'
 import languageApi from '@/api/languageApi';
 import courseApi from '@/api/courseApi';
 import { useRouter,useRoute } from 'vue-router'
-import axios from 'axios';
+import axiosClient from '../../../api/axiosClient';
 var FormData = require('form-data');
 
 
@@ -167,7 +167,7 @@ async function submitForm() {
     formData.append("level", post.value.level);
     console.log(JSON.stringify(Object.fromEntries(formData)));
 
-    await axios.put('http://localhost:3000/api/course/'+id.value , formData).then(() => {
+    await axiosClient.put('http://localhost:3000/api/course/'+id.value , formData).then(() => {
             router.push({ path: '/course' }).then(() => {
             toast.success('Sửa khóa học thành công');
         })
