@@ -2,27 +2,36 @@
   <header class="Header">
     <div class="row">
       <div class="col col-10">
-        <div class="row g-0">
-          <div class="col col-1">
-            <div class="logo-size">
-              <img src="../../../assets/images/logo.png" alt="">
+        <div class="row g-0 ">
+          <div class="col-3">
+            <div class="row">
+              <div class="col col-3">
+                <div class="logo-size">
+                  <img src="../../../assets/images/logo.png" alt="">
+                </div>
+              </div>
+              <div class="col col-9">
+                <div class="name-logo"><router-link to="/">Đại Học Cần Thơ</router-link> </div>
+              </div>
             </div>
           </div>
-          <div class="col col-2">
-            <div class="name-logo"><router-link to="/">Đại Học Cần Thơ</router-link> </div>
+          <div class="col-9">
+            <div class="row">
+              <div class="col col-1 p-0">
+                <p class="menu-tag-header"><router-link to="/learning">Khóa học</router-link> </p>
+              </div>
+              <div class="col col-1 p-0">
+                <p class="menu-tag-header">Thi thử</p>
+              </div>
+              <div class="col col-1 p-0">
+                <p class="menu-tag-header"><router-link to="/discussion">Trao đổi</router-link> </p>
+              </div>
+              <div class="col col-1 p-0">
+                <p class="menu-tag-header">Đánh giá</p>
+              </div>
+            </div>
           </div>
-          <div class="col col-1">
-            <p class="menu-tag-header"><router-link to="learning">Khóa học</router-link> </p>
-          </div>
-          <div class="col col-1">
-            <p class="menu-tag-header">Thi thử</p>
-          </div>
-          <div class="col col-1">
-            <p class="menu-tag-header"><router-link to="discussion">Trao đổi</router-link> </p>
-          </div>
-          <div class="col col-1">
-            <p class="menu-tag-header">Đánh giá</p>
-          </div>
+
 
 
         </div>
@@ -42,9 +51,9 @@
 </template>
 
 <script>
-export default {
-  name: 'Header'
-}
+
+
+
 </script>
 
 
@@ -81,8 +90,8 @@ export default {
 
 .name-logo a {
   font-size: 24px;
-    line-height: 70px;
-    font-weight: 700;
+  line-height: 70px;
+  font-weight: 700;
   color: blue;
   text-decoration: none !important;
 
@@ -110,27 +119,32 @@ p.menu-tag-header a {
   text-decoration: none;
 
 }
-.menu-tag-header{
+
+.menu-tag-header {
   position: relative;
 }
+
 .menu-tag-header::before {
-    content: "";
-    height: 4px;
-    width: 0%;
-    background-color: blue;
-    display: inherit;
-    position: absolute;
-    border-radius: 4px;
-    bottom: 0;
-    transition: 0.3s;
+  content: "";
+  height: 4px;
+  width: 0%;
+  background-color: blue;
+  display: inherit;
+  position: absolute;
+  border-radius: 4px;
+  bottom: 0;
+  transition: 0.3s;
 }
-.menu-tag-header:hover.menu-tag-header::before{
+
+.menu-tag-header:hover.menu-tag-header::before {
   width: 100%;
 }
-.menu-tag-header:hover a{
+
+.menu-tag-header:hover a {
   color: blue;
 
 }
+
 a.vue-school-active-link.router-link-exact-active {
   color: blue;
 

@@ -21,7 +21,7 @@
                     <div class="course-item">
                         <div class="img-size">
                             <img class="thumnail_course" :src="require('../../assets/images/'+course.image )" aspect-ratio="2.75" >
-                            <div class="img-size-view">Tham gia</div>
+                            <div class="img-size-view"><router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link></div>
                         </div>
                         <div class="course-info">
                             <div class="course-item-name">{{ course.name }}</div>
@@ -175,7 +175,7 @@ input.search-box {
     left: 50%;
     transform: translate(-50%,-50%);
     font-size: 23px;
-    color:rgb(255, 255, 255);
+
     font-weight: 700;
     bottom: 50%;
     opacity: 0;
@@ -244,8 +244,12 @@ img.img-banner {
     opacity: 1;
     cursor: pointer;
 }
-.img-size-view:hover{
+.img-size-view:hover a.a_link{
     color: rgb(146, 206, 255);
+    text-decoration: none;
+}
+a.a_link{
+color: white;
 }
 .logo_course{
     width: 40px;

@@ -4,6 +4,7 @@ import AdminLayout from "../layouts/AdminLayout.vue"
 import Home from "../components/frontend/Home.vue"
 import Learning from "../components/frontend/Learning.vue"
 import Discussion from "../components/frontend/Discussion.vue"
+import Lesson from "../components/frontend/Lesson.vue"
 import Error from "../components/frontend/Error.vue"
 
 
@@ -22,6 +23,8 @@ import LabEdit from "../components/backend/lab/edit.vue"
 import Login from "../components//backend/authen/login.vue"
 import Signup from "../components/backend/authen/signup.vue"
 
+
+// Kiem tra login phan ADMIN----------------------------------------------------------------------------
 const requireAuth = (to, from, next) => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -33,7 +36,7 @@ const requireAuth = (to, from, next) => {
       next();
     }
   };
-
+  // Danh cho trang login
   const requireAuthLogin = (to, from, next) => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -45,14 +48,21 @@ const requireAuth = (to, from, next) => {
       next();
     }
   };
+// --------------------------------------------------------------------------------------------------------
 
 
 const routes = [
     // Frontend
     { path: '/', component: <UserLayout><Home /></UserLayout>,  name: "Home"  ,props: true,},
     { path: '/learning', component:<UserLayout> <Learning /></UserLayout>,  name: "Learning"  ,props: true,},
+    { path: '/lesson/:id', component:<UserLayout> <Lesson /></UserLayout>,  name: "Lesson"  ,props: true,},
     { path: '/discussion', component:<UserLayout><Discussion /></UserLayout> ,  name: "Discussion"  ,props: true,},
     { path: '/:pathMatch(.*)*', component: <Error />,  name:  Error ,props: true,},
+
+
+
+
+
 
 
     // Backend

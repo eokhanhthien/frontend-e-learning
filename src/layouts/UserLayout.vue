@@ -6,11 +6,9 @@
 
 </template>
 
-<script>
+<script setup>
 import Header from '../components/frontend/include/Header.vue';
-export default {
-    components: {Header}
-}
+
 </script>
 
 <style>
