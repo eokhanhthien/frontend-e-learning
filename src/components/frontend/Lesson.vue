@@ -48,7 +48,7 @@
         </div>
 
         <div v-if="lesson_data.length > 0" class="container-xl">
-            <div v-if="isLogin">
+            <div v-if="is_Login">
                 <div class="col col-12 p-0">
                     <h3 class="title-block">Tất cả bài học</h3>
                 </div>
@@ -96,11 +96,15 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted,computed} from "vue";
 import { useRoute } from 'vue-router'
 import lessonApi from '@/api-frontend/lessonApi';
 import courseApi from '@/api-frontend/courseApi';
 
+import {useStore} from "../../Pinia/store.js"
+
+const store = useStore();
+const is_Login = computed(() => store.is_Login);
 
 const isLogin =ref(false)
 const id = ref(useRoute().params.id);

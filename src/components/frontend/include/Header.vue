@@ -11,7 +11,7 @@
                 </div>
               </div>
               <div class="col col-9">
-                <div class="name-logo"><router-link to="/">Đại Học Cần Thơ</router-link> </div>
+                <div class="name-logo"><router-link to="/">Đại Học Cần Thơ </router-link> </div>
               </div>
             </div>
           </div>
@@ -36,15 +36,28 @@
 
         </div>
       </div>
-      <div class="col col-2">
-        <div v-if="isLogin" class="row g-0 isloginsuccess">
-          <div class="col col-3 p-0">
-            <div class="size-avatar">
-            <img :src="require('../../../assets/images/'+infoUserLogin.image )" alt="">
+      <div class="col-2">
+        <div v-if="is_Login" class="row g-0 isloginsuccess">
+          <div class="col-3 p-0">
+
+
           </div>
-    
+          <div class="col-2 p-0">
+            <div v-if="infoUserLogin.image" class="size-avatar">
+              <img :src="require('../../../assets/images/' + infoUserLogin.image)" alt="">
+            </div>
+            <div v-else class="size-avatar">
+              <img :src="require('../../../assets/images/user-default.png')" alt="">
+            </div>
           </div>
-          <div class="col col-6 p-0"><div>{{ infoUserLogin.name }}</div></div>
+          <div class="col-2 drop_info"><i class="fa-solid fa-sort-down icon_drop_down"></i>
+          <div class="dropdown_item">
+            <p class="dropdown_item_border"><i class="fa-solid fa-user"></i> {{ infoUserLogin.name }}</p>
+            <p class="dropdown_item_border"><span><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</span> </p>
+            <p class="dropdown_item_border"><span><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</span></p>
+            <p class=""><span @click="handleLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</span> </p>
+          </div>
+          </div>
 
         </div>
         <div v-else class="row g-0">
@@ -69,7 +82,7 @@
           <div>ĐĂNG NHẬP TÀI KHOẢN CỦA BẠN</div>
           <div class="row m-0 mt-5">
             <input v-model="infoUser.email" class="col col-12  input-auth" type="text" placeholder="Tài khoản">
-            <input v-model="infoUser.password"  class="col col-12  input-auth" type="password" placeholder="Mật khẩu">
+            <input v-model="infoUser.password" class="col col-12  input-auth" type="password" placeholder="Mật khẩu">
           </div>
           <button class="btn-authen mt-2 mb-2 custom-br" @click="handleLogin">Login</button>
           <!-- <p>Bạn chưa có tài khoản <router-link to="/register" id="tab-menu"> Đăng ký ngay </router-link></p> -->
@@ -93,9 +106,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref, inject } from "vue";
+import { onMounted, ref, inject ,computed,watch} from "vue";
 import userApi from '@/api-frontend/userApi';
 import { useRouter } from 'vue-router'
+import {useStore} from "../../../Pinia/store.js"
+
+const store = useStore();
+// const {is_Login} = store;
+const is_Login = computed(() => store.is_Login);
 
 
 const post = ref({
@@ -113,8 +131,9 @@ const infoUser = ref({
 })
 
 const isLogin = ref(false);
+
 const infoUserLogin = ref({});
-console.log(isLogin.value);
+// console.log(isLogin.value);
 const content_signup_ref = ref();
 const btn_login_ref = ref();
 const content_login_ref = ref();
@@ -136,13 +155,13 @@ onMounted(() => {
 
 
   //hàm lưu token nên ở đây mới có dữ liệu
-    if(localStorage.getItem('tokenUser')){
-        isLogin.value = true;
-        infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
-        console.log(infoUserLogin.value)
-    }else{
-        isLogin.value = false;
-    }
+  if (localStorage.getItem('tokenUser')) {
+    isLogin.value = true;
+    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+    console.log(infoUserLogin.value)
+  } else {
+    isLogin.value = false;
+  }
 
 });
 
@@ -175,30 +194,45 @@ const toast = inject('toast');
 
 async function handleCreatUser() {
   const res = await userApi.signup({ post: post.value })
-  if(res){
-        post.value.name = '';
-        post.value.email = '';
-        post.value.password = '';
-        Model_container.value.classList.remove('Model-container-active')
-        Model_item.value.classList.remove('Model-active')
-        toast.success('Đăng ký thành công thành công'); 
-    }  
+  if (res) {
+    post.value.name = '';
+    post.value.email = '';
+    post.value.password = '';
+    Model_container.value.classList.remove('Model-container-active')
+    Model_item.value.classList.remove('Model-active')
+    toast.success('Đăng ký thành công thành công');
+  }
 }
 
-async function handleLogin(){
-  const user = await userApi.login({post:infoUser.value })
+async function handleLogin() {
+
+  console.log(is_Login.value)
+  
+  const user = await userApi.login({ post: infoUser.value })
   // console.log(user);
   const token = user.data.token;
   const user_info = user.data.user;
   try {
     localStorage.setItem('tokenUser', token)
     localStorage.setItem('user_nomal', JSON.stringify(user_info))
-    console.log(localStorage.getItem('tokenUser'))
-    location.reload()
+    Model_container.value.classList.remove('Model-container-active')
+    Model_item.value.classList.remove('Model-active')
+    store.onLogin(true)
+    toast.success('Đăng nhập thành công thành công');
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 
+}
+
+function handleLogout() {
+  infoUser.value.email = '';
+  infoUser.value.password = '';
+  localStorage.removeItem('tokenUser')
+  localStorage.removeItem('user_nomal')
+  store.onLogin(false)
+  toast.success('Đăng xuất thành công thành công');
+  // location.reload();
 }
 
 </script>
@@ -211,25 +245,28 @@ async function handleLogin(){
   box-sizing: border-box;
   font-family: 'Muli', sans-serif;
 }
+
 .isloginsuccess {
-    line-height: 70px;
-    font-size: 18px;
+  line-height: 70px;
+  font-size: 18px;
 }
 
 .size-avatar {
-    text-align: center;
-    width: 50px;
-    height: 50px;
-    border: 4px solid #ccc;
-    line-height: 0;
-    margin-top: 10px;
-    border-radius: 50px;
-    overflow: hidden;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  border: 4px solid #ccc;
+  line-height: 0;
+  margin-top: 10px;
+  border-radius: 50px;
+  overflow: hidden;
 }
-.size-avatar img{
+
+.size-avatar img {
   width: 50px;
   height: 50px;
 }
+
 .btn-signup_md {
   background-color: #827ffe;
   font-size: 18px;
@@ -421,4 +458,58 @@ a.vue-school-active-link.router-link-exact-active {
 
 .custom-br {
   background: linear-gradient(270deg, #8f73f0 0%, #5095ff 100%);
-}</style>
+}
+.icon_drop_down{
+  cursor: pointer;
+}
+
+.drop_info{
+  position: relative;
+}
+.drop_info:hover .dropdown_item{
+    visibility: visible;
+    opacity: 1;
+
+}
+.dropdown_item {
+    position: absolute;
+    width: 180px;
+    background-color: #ffffff;
+    left: -294%;
+    padding: 10px 10px 0 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    border-top-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    bottom: -213%;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    bottom: -190px;
+}
+
+.dropdown_item:before {
+    content: "";
+    position: absolute;
+    width: 0px;
+    height: 0px;
+    border-left: 26px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 12px solid #ffffff;
+    top: -11px;
+    right: 0px;
+}
+.dropdown_item p{
+    cursor: pointer;
+    line-height: 43px;
+    height: 43px;
+    margin: 0;
+}
+.dropdown_item_border{
+  border-bottom:1px solid #ccc ;
+}
+
+.dropdown_item p:hover span{
+  color: #5095ff;
+}
+</style>
