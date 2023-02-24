@@ -125,9 +125,9 @@ const courses = ref([]);
 onMounted(() => {
     (async function () {
         const res = await frontendApi.getAll();
-        console.log(res.data.data)
+        // console.log(res.data.data)
         courses.value = res.data.data;
-        console.log(courses.value)
+        // console.log(courses.value)
 
     })()
 })

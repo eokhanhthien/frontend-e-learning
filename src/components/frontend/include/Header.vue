@@ -1,9 +1,10 @@
 <template>
   <header class="Header">
+    <div class="container-xl">
     <div class="row">
-      <div class="col col-10">
+      <div class="col col-9">
         <div class="row g-0 ">
-          <div class="col-3">
+          <div class="col-4">
             <div class="row">
               <div class="col col-3">
                 <div class="logo-size">
@@ -15,18 +16,18 @@
               </div>
             </div>
           </div>
-          <div class="col-9">
+          <div class="col-8">
             <div class="row">
-              <div class="col col-1 p-0">
+              <div class="col col-2 p-0">
                 <p class="menu-tag-header"><router-link to="/learning">Khóa học</router-link> </p>
               </div>
-              <div class="col col-1 p-0">
+              <div class="col col-2 p-0">
                 <p class="menu-tag-header">Thi thử</p>
               </div>
-              <div class="col col-1 p-0">
+              <div class="col col-2 p-0">
                 <p class="menu-tag-header"><router-link to="/discussion">Trao đổi</router-link> </p>
               </div>
-              <div class="col col-1 p-0">
+              <div class="col col-2 p-0">
                 <p class="menu-tag-header">Đánh giá</p>
               </div>
             </div>
@@ -36,7 +37,7 @@
 
         </div>
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <div v-if="is_Login" class="row g-0 isloginsuccess">
           <div class="col-3 p-0">
 
@@ -68,6 +69,7 @@
 
         </div>
       </div>
+    </div>
     </div>
 
 
@@ -158,7 +160,7 @@ onMounted(() => {
   if (localStorage.getItem('tokenUser')) {
     isLogin.value = true;
     infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
-    console.log(infoUserLogin.value)
+    // console.log(infoUserLogin.value)
   } else {
     isLogin.value = false;
   }
@@ -249,6 +251,7 @@ function handleLogout() {
 .isloginsuccess {
   line-height: 70px;
   font-size: 18px;
+  justify-content: end;
 }
 
 .size-avatar {
@@ -399,7 +402,7 @@ function handleLogout() {
 p.menu-tag-header {
   text-align: center;
   line-height: 70px;
-
+  font-weight: 600;
 }
 
 button.btn-signup {
@@ -416,7 +419,7 @@ p.menu-tag-header a {
   color: #4c4c4c;
   cursor: pointer;
   text-decoration: none;
-
+  transition: 0.3s;
 }
 
 .menu-tag-header {
@@ -475,7 +478,7 @@ a.vue-school-active-link.router-link-exact-active {
     position: absolute;
     width: 180px;
     background-color: #ffffff;
-    left: -294%;
+    right: 40%;
     padding: 10px 10px 0 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
     border-top-left-radius: 6px;
@@ -512,4 +515,24 @@ a.vue-school-active-link.router-link-exact-active {
 .dropdown_item p:hover span{
   color: #5095ff;
 }
+
+
+body::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb
+{
+	background-color: #4548f8;
+	border: 2px solid #7b91f1;
+}
+
 </style>
