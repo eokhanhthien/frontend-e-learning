@@ -6,9 +6,7 @@ const courseApi = {
     getRow: async ({ id }) => {
         return axiosClient.get('http://localhost:3000/api/course/' + id)
     },
-    create: async (post) => {
-        console.log(post);
-    },
+    
     edit: async ({ id, name }) => {
         return axiosClient.put('http://localhost:3000/api/course/' + id, { name })
     },

@@ -54,7 +54,7 @@
           <div class="col-2 drop_info"><i class="fa-solid fa-sort-down icon_drop_down"></i>
           <div class="dropdown_item">
             <p class="dropdown_item_border"><i class="fa-solid fa-user"></i> {{ infoUserLogin.name }}</p>
-            <p class="dropdown_item_border"><span><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</span> </p>
+            <p class="dropdown_item_border"><span> <router-link to="/info-user"><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</router-link></span> </p>
             <p class="dropdown_item_border"><span><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</span></p>
             <p class=""><span @click="handleLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</span> </p>
           </div>
@@ -123,6 +123,12 @@ const post = ref({
   email: '',
   password: '',
   image: 'user-default.png',
+  city:'Chưa cập nhật',
+  district:'Chưa cập nhật',
+  ward:'Chưa cập nhật',
+  phonenumber:'Chưa cập nhật',
+  birthday:'',
+  sex:'Chưa cập nhật',
   role: '3',
 
 })
@@ -143,6 +149,7 @@ const btn_signup_ref = ref();
 const Model_container = ref();
 const Model_item = ref();
 
+const header = ref();
 onMounted(() => {
   const btn_login = document.querySelector(".btn-login")
   const content_login = document.querySelector(".content-login")
@@ -150,6 +157,7 @@ onMounted(() => {
   const btn_signup = document.querySelector(".btn-signup_md")
   Model_container.value = document.querySelector(".Model-container")
   Model_item.value = document.querySelector(".Model-item")
+  header.value = document.querySelector(".Header")
   content_signup_ref.value = content_signup;
   btn_login_ref.value = btn_login;
   content_login_ref.value = content_login;
@@ -164,7 +172,7 @@ onMounted(() => {
   } else {
     isLogin.value = false;
   }
-
+  window.addEventListener('scroll', handleScroll);
 });
 
 
@@ -219,6 +227,7 @@ async function handleLogin() {
     localStorage.setItem('user_nomal', JSON.stringify(user_info))
     Model_container.value.classList.remove('Model-container-active')
     Model_item.value.classList.remove('Model-active')
+    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
     store.onLogin(true)
     toast.success('Đăng nhập thành công thành công');
   } catch (error) {
@@ -236,6 +245,24 @@ function handleLogout() {
   toast.success('Đăng xuất thành công thành công');
   // location.reload();
 }
+
+
+// const scrollDirection = ref('');
+
+let prevScrollY = 0;
+const handleScroll = () => {
+  const currentScrollY = window.scrollY;
+  if (currentScrollY > prevScrollY && currentScrollY > 70) {
+    header.value.classList.add('active-header')
+    // console.log('down');
+    console.log(prevScrollY);
+  } else if (currentScrollY < prevScrollY) {
+    header.value.classList.remove('active-header')
+    // console.log('up');
+  }
+  prevScrollY = currentScrollY;
+};
+
 
 </script>
 
@@ -371,14 +398,22 @@ function handleLogout() {
   height: 70px;
   width: 100%;
   background-color: rgb(255, 255, 255);
-  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
   padding: 0 20px;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 1000;
+  transition: 0.4s;
 }
+
+.active-header{
+  top: -70px;
+}
+.hidden-header{
+  position: fixed;
+  top: -70px;
+}
+
 
 .logo-size {
   width: 70px;
@@ -516,17 +551,20 @@ a.vue-school-active-link.router-link-exact-active {
   color: #5095ff;
 }
 
+.dropdown_item p:hover a{
+  text-decoration: none;
+}
 
 body::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
-	background-color: #F5F5F5;
+	background-color: #ffffff;
 }
 
 body::-webkit-scrollbar
 {
 	width: 6px;
-	background-color: #F5F5F5;
+	background-color: #ffffff;
 }
 
 body::-webkit-scrollbar-thumb
@@ -535,4 +573,8 @@ body::-webkit-scrollbar-thumb
 	border: 2px solid #7b91f1;
 }
 
+
+.dropdown_item a{
+  text-decoration: none;
+}
 </style>

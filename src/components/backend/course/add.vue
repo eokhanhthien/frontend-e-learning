@@ -123,22 +123,6 @@ function onChange1(event) {
 
 const router = useRouter()
 const toast = inject('toast');
-// async function handleAddCourse() {
-//     const res = await courseApi.create({
-//         name: name_course.value,
-//         id_language: id_language.value,
-//         name_language: name_language.value,
-//         level: level_course.value,
-//         description: description_course.value,
-//         image: image.value
-//     })
-//     if (res) {
-//         // window.history.back();
-//         router.push({ path: '/course' }).then(() => {
-//             toast.success('Thêm khóa học thành công');
-//         })
-//     }
-// }
 
 async function submitForm() {
     const formData = new FormData();

@@ -5,6 +5,9 @@ import Home from "../components/frontend/Home.vue"
 import Learning from "../components/frontend/Learning.vue"
 import Discussion from "../components/frontend/Discussion.vue"
 import Lesson from "../components/frontend/Lesson.vue"
+import DetailLesson from "../components/frontend/DetailLesson.vue"
+import infoUser from "../components/frontend/infoUser.vue"
+import infoUserEdit from "../components/frontend/infoUserEdit.vue"
 import Error from "../components/frontend/Error.vue"
 
 
@@ -56,7 +59,10 @@ const routes = [
     { path: '/', component: <UserLayout><Home /></UserLayout>,  name: "Home"  ,props: true,},
     { path: '/learning', component:<UserLayout> <Learning /></UserLayout>,  name: "Learning"  ,props: true,},
     { path: '/lesson/:id', component:<UserLayout> <Lesson /></UserLayout>,  name: "Lesson"  ,props: true,},
+    { path: '/detail-lesson/:id', component:<UserLayout> <DetailLesson /></UserLayout>,  name: "DetailLesson"  ,props: true,},
     { path: '/discussion', component:<UserLayout><Discussion /></UserLayout> ,  name: "Discussion"  ,props: true,},
+    { path: '/info-user', component:<UserLayout><infoUser /></UserLayout> ,  name: "infoUser"  ,props: true,},
+    { path: '/info-user-edit', component:<UserLayout><infoUserEdit /></UserLayout> ,  name: "infoUserEdit"  ,props: true,},
     { path: '/:pathMatch(.*)*', component: <Error />,  name:  Error ,props: true,},
 
 
