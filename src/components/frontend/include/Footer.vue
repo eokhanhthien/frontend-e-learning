@@ -50,7 +50,7 @@
 <style>
 .Footer{
     height: 400px;
-    background-color: rgb(57 77 255);
+    background-color: #2d4569;
     overflow: hidden;
 }
 .footer-text {

@@ -133,18 +133,13 @@ async function submitForm() {
     formData.append("id_language", id_language.value);
     formData.append("level", level_course.value);
     console.log(JSON.stringify(Object.fromEntries(formData)));
-    // for (var pair of formData.entries()) {
-    // console.log(pair[0]+ ', ' + pair[1]); 
-    // }
-    // await axios.post('http://localhost:3000/api/course',formData)
+
     await axiosClient.post('http://localhost:3000/api/course', formData).then(() => {
             router.push({ path: '/course' }).then(() => {
             toast.success('Thêm khóa học thành công');
         })
       })
-    // console.log(fileReturn);
-    
-    // await courseApi.create(JSON.stringify(formData))
+
 }
 
 

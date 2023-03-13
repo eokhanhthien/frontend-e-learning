@@ -9,7 +9,10 @@ const userApi = {
         // console.log(post);
         return axios.post('http://localhost:3000/api/user-frontend/signup',  post )
     },
-
+    changeinfo: async ( post ) => {
+        // console.log(post);
+        return axios.post('http://localhost:3000/api/user-frontend/changeinfo',  post )
+    },
 
 }
 

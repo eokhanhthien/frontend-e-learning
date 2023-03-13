@@ -175,14 +175,13 @@ input.search-box {
 }
 .img-size-view{
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,0%);
+    top: 115%;
+    /* left: 78%; */
+    transform: translate(200px,0%);
     font-size: 23px;
-
     font-weight: 700;
     /* bottom: 94px; */
-    opacity: 0;
+    /* opacity: 0; */
     transition: 0.3s;
 }
 .img-size img{
@@ -240,12 +239,12 @@ img.img-banner {
 
 .course-item:hover .thumnail_course{
     transform: scale(1.1);
-    filter: blur(3px) brightness(60%);
+    /* filter: blur(3px) brightness(60%); */
 }
 
 .course-item:hover .img-size-view{
-    transform: translate(-50%,-50%);
-    opacity: 1;
+    transform: translate(200px,-203%);
+    /* opacity: 1; */
     cursor: pointer;
 }
 .img-size-view:hover a.a_link{
@@ -261,8 +260,8 @@ color: white;
 </style>
 <style scoped>
 .glow-on-hover {
-    width: 220px;
-    height: 50px;
+    width: 88px;
+    height: 32px;
     border: none;
     outline: none;
     color: #fff;
@@ -271,6 +270,7 @@ color: white;
     position: relative;
     z-index: 0;
     border-radius: 10px;
+    font-size: 16px;
 }
 
 .glow-on-hover:before {
@@ -285,7 +285,7 @@ color: white;
     width: calc(100% + 4px);
     height: calc(100% + 4px);
     animation: glowing 20s linear infinite;
-    opacity: 0;
+    /* opacity: 0; */
     transition: opacity .3s ease-in-out;
     border-radius: 10px;
 }

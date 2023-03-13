@@ -217,12 +217,13 @@ async function handleCreatUser() {
 async function handleLogin() {
 
   console.log(is_Login.value)
-  
-  const user = await userApi.login({ post: infoUser.value })
-  // console.log(user);
-  const token = user.data.token;
-  const user_info = user.data.user;
+
   try {
+      
+    const user = await userApi.login({ post: infoUser.value })
+    // console.log(user);
+    const token = user.data.token;
+    const user_info = user.data.user;
     localStorage.setItem('tokenUser', token)
     localStorage.setItem('user_nomal', JSON.stringify(user_info))
     Model_container.value.classList.remove('Model-container-active')
@@ -231,7 +232,7 @@ async function handleLogin() {
     store.onLogin(true)
     toast.success('Đăng nhập thành công thành công');
   } catch (error) {
-    console.log(error);
+    toast.error('Sai thông tin đăng nhập');
   }
 
 }
@@ -255,7 +256,7 @@ const handleScroll = () => {
   if (currentScrollY > prevScrollY && currentScrollY > 70) {
     header.value.classList.add('active-header')
     // console.log('down');
-    console.log(prevScrollY);
+    // console.log(prevScrollY);
   } else if (currentScrollY < prevScrollY) {
     header.value.classList.remove('active-header')
     // console.log('up');

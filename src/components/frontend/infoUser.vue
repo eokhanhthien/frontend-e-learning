@@ -33,9 +33,13 @@
                                         <div class="col-5"><p>Họ và tên</p> </div>
                                         <div class="col-7"><p>{{ infoUserLogin.name }}</p> </div>
                                     </div>
-                                                                        <div class="row">
+                                    <div class="row">
                                         <div class="col-5"><p>Ngày sinh</p> </div>
                                         <div class="col-7"><p>{{ infoUserLogin.birthday }}</p> </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-5"><p>Giới tính</p> </div>
+                                        <div class="col-7"><p>{{ infoUserLogin.sex }}</p> </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-5"><p>Email</p> </div>
