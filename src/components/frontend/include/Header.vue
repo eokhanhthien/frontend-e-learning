@@ -92,9 +92,9 @@
         <div class="content-signup Model-container-off">
           <div>ĐĂNG KÝ TÀI KHOẢN MỚI</div>
           <div class="row m-0 mt-5">
-            <input v-model="post.name" class="col col-12  input-auth" type="text" placeholder="Họ tên">
-            <input v-model="post.email" class="col col-12  input-auth" type="text" placeholder="Email">
-            <input v-model="post.password" class="col col-12  input-auth" type="password" placeholder="Mật khẩu">
+            <input v-model="username" class="col col-12  input-auth" type="text" placeholder="Họ tên"><span class="message-validate text-start">{{ errors.username }}</span>
+            <input v-model="email" class="col col-12  input-auth" type="text" placeholder="Email"><span class="message-validate text-start">{{ errors.email }}</span>
+            <input v-model="password" class="col col-12  input-auth" type="password" placeholder="Mật khẩu"><span class="message-validate text-start">{{ errors.password }}</span>
           </div>
           <button class="btn-authen mt-2 mb-2 custom-br" @click="handleCreatUser">Signup</button>
 
@@ -112,6 +112,65 @@ import { onMounted, ref, inject ,computed,watch} from "vue";
 import userApi from '@/api-frontend/userApi';
 import { useRouter } from 'vue-router'
 import {useStore} from "../../../Pinia/store.js"
+
+
+import { defineRule, useField, useForm } from "vee-validate";
+import { required } from "@vee-validate/rules";
+
+// Validate------------------------------------------------------------------------
+const { handleSubmit } = useForm();
+
+function validateEmail(value) {
+  const pattern = /^\S+@\S+\.\S+$/;
+  if (!value) {
+    return 'Email không được trống';
+  }
+
+  if ( !pattern.test(value)) {
+    return 'Email không hợp lệ';
+  }
+  else{
+    post.value.email = email.value;
+
+  }
+  return true;
+}
+
+function validateName(value) {
+
+  if (!value) {
+    return 'Tên không được trống';
+
+  }
+  else{
+    post.value.name = username.value;
+  }
+  return true;
+}
+
+function validatePassword(value){
+  if (!value) {
+    return 'Mật khẩu không được trống';
+
+  }
+
+  if (value.length < 8) {
+    return 'Mật khẩu phải dài hơn 8 kí tự';
+  }
+
+  else{
+    post.value.password = password.value;
+  }
+  return true;
+}
+
+const { value: username, errorMessage: usernameError } = useField("username", validateName);
+const { value: email, errorMessage: emailError } = useField("email", validateEmail);
+const { value: password, errorMessage: passwordError } = useField("password", validatePassword);
+
+const errors = { username: usernameError , email: emailError, password: passwordError};
+
+// Validate------------------------------------------------------------------------
 
 const store = useStore();
 // const {is_Login} = store;
@@ -202,7 +261,8 @@ function turnon() {
 const router = useRouter()
 const toast = inject('toast');
 
-async function handleCreatUser() {
+// async function handleCreatUser() {
+  const handleCreatUser = handleSubmit(async () => {
   try {
     const res = await userApi.signup({ post: post.value })
     if (res) {
@@ -218,7 +278,7 @@ async function handleCreatUser() {
     
   }
 
-}
+})
 
 async function handleLogin() {
 
@@ -269,6 +329,9 @@ const handleScroll = () => {
   }
   prevScrollY = currentScrollY;
 };
+
+
+
 
 
 </script>
