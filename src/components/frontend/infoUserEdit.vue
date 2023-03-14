@@ -29,14 +29,14 @@
                                         <img :src="require('../../assets/images/user-default.png')" alt="">
 
                                     </div>
-                                    
+                                    <input class="mt-3 form-control" type="file" name="image" ref="image" @change="selectFile">
                                 </div>
                             <div class="col-6">
                                 <div class="row">
                                     <div class="col-5">
                                         <p>Họ và tên</p>
                                     </div>
-                                    <div class="col-7"> <input class="form-control" type="text" v-model="infoUserLogin.name" > </div>
+                                    <div class="col-7"> <input class="form-control" type="text" v-model="username" >       <span class="message-validate">{{ errors.username }}</span> </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5">
@@ -55,11 +55,12 @@
                                         <p>Giới tính</p>
                                     </div>
                                     <div class="col-7"> 
-                                        <select class="form-select" aria-label="Default select example" v-model="infoUserLogin.sex">
+                                        <select class="form-select" aria-label="Default select example" v-model="sex">
                                             <option selected>Chọn giới tính</option>
                                             <option value="Nam">Nam</option>
                                             <option value="Nữ">Nữ</option>
                                         </select> 
+                                        <span class="message-validate">{{ errors.sex }}</span>
                                     </div>
                                 </div>
 
@@ -107,11 +108,7 @@
                                 </div>
                          
                             <button class="btn btn-primary" type="submit" >Cập nhật</button>
-
                             </div>
-
-
-
 
                         </div>
                     </div>
@@ -128,8 +125,56 @@ import { ref, watch, onMounted, inject } from 'vue';
 import axios from 'axios';
 import userApi from '@/api-frontend/userApi';
 
+import { defineRule, useField, useForm } from "vee-validate";
+import { required } from "@vee-validate/rules";
+
+
 
 const infoUserLogin = ref({});
+
+defineRule("required", required);
+
+const { handleSubmit } = useForm();
+
+function validateField(value) {
+  if (!value) {
+    return 'Tên không được trống';
+  }
+
+//   if (value.length < 8) {
+//     return 'Mật khẩu phải dài hơn 8 kí tự';
+//   }
+
+  else{
+    infoUserLogin.value.name = username.value;
+  }
+  return true;
+}
+
+function validateSelect(value) {
+  if (value == 'Chọn giới tính') {
+    return 'Hãy chọn giới tính';
+
+  }
+
+//   if (value.length < 8) {
+//     return 'Mật khẩu phải dài hơn 8 kí tự';
+//   }
+
+  else{
+    infoUserLogin.value.sex = sex.value;
+  }
+  return true;
+}
+
+const { value: username, errorMessage: usernameError } = useField("username", validateField);
+const { value: sex, errorMessage: sexError } = useField("sex", validateSelect);
+
+const errors = { username: usernameError, sex: sexError };
+
+// const submitForm1 = handleSubmit(() => {
+//   alert("Submitted!");
+// });
 
 onMounted(()=>{
     infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
@@ -142,6 +187,12 @@ onMounted(()=>{
     const day = ("0" + date.getDate()).slice(-2);
     const formattedDate = `${year}-${month}-${day}`;
     infoUserLogin.value.birthday = formattedDate;
+
+
+    // Cap nhat lai thong tin cac truong validate
+    username.value = infoUserLogin.value.name;
+    sex.value = infoUserLogin.value.sex ;
+
 })
 
 const toast = inject('toast');
@@ -243,7 +294,8 @@ console.log(file.value);
 
 
 // Handle up dữ liệu
-async function submitForm() {
+const submitForm = handleSubmit(async () => {
+// async function submitForm() {
     // const formData = new FormData();
     // formData.append("image", file.value);
     // formData.append("old_image", infoUserLogin.value.image);
@@ -334,6 +386,7 @@ async function submitForm() {
 
     }
 
+            // console.log(infoUserLogin.value)          
 
 
     // await axios.post('http://localhost:3000/api/user-frontend/changeinfo',  formData ).then(() => {
@@ -341,7 +394,12 @@ async function submitForm() {
     //   })
 
 
-}
+})
 </script>
 
-<style ></style>
+<style >
+.message-validate{
+    color: red;
+    margin: 4px 0;
+}
+</style>

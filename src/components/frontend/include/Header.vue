@@ -203,15 +203,21 @@ const router = useRouter()
 const toast = inject('toast');
 
 async function handleCreatUser() {
-  const res = await userApi.signup({ post: post.value })
-  if (res) {
-    post.value.name = '';
-    post.value.email = '';
-    post.value.password = '';
-    Model_container.value.classList.remove('Model-container-active')
-    Model_item.value.classList.remove('Model-active')
-    toast.success('Đăng ký thành công thành công');
+  try {
+    const res = await userApi.signup({ post: post.value })
+    if (res) {
+      post.value.name = '';
+      post.value.email = '';
+      post.value.password = '';
+      Model_container.value.classList.remove('Model-container-active')
+      Model_item.value.classList.remove('Model-active')
+      toast.success('Đăng ký thành công thành công');
+    }
+  } catch (error) {
+      toast.error('Email đã tồn tại');
+    
   }
+
 }
 
 async function handleLogin() {
@@ -296,6 +302,7 @@ const handleScroll = () => {
 .size-avatar img {
   width: 50px;
   height: 50px;
+  object-fit: cover;
 }
 
 .btn-signup_md {

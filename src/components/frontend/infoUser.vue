@@ -20,11 +20,9 @@
                                     <p class="">Ảnh đại diện</p>
                                     <div v-if="infoUserLogin.image" class="img-size-info">
                                         <img :src="require('../../assets/images/' + infoUserLogin.image)" alt="">
-
                                     </div>
                                     <div v-else  class="img-size-info">
                                         <img :src="require('../../assets/images/user-default.png')" alt="">
-
                                     </div>
                                     
                                 </div>
@@ -46,7 +44,7 @@
                                         <div class="col-7"><p>{{ infoUserLogin.email }}</p> </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-5"><p>Thành phố/ Tỉnh thành</p> </div>
+                                        <div class="col-5"><p>Tỉnh thành</p> </div>
                                         <div class="col-7"><p>{{ infoUserLogin.city }}</p> </div>
                                     </div>
                                     <div class="row">
