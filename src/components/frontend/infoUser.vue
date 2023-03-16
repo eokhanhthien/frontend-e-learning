@@ -6,8 +6,8 @@
                         <div class=" br-custom-item fixed-height">
                         <div><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
                         <div><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người dùng</router-link></div>
+                        <div><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
 
-                        <div>Thay đổi mật khẩu</div>
                         </div>
                     </div>
                     <div class="col-xl-9 ">
@@ -117,7 +117,7 @@ onMounted(()=>{
 }
 
 a.link-custom {
-    color: black;
+    color: #4c4c4c;
     font-weight: 600;
     line-height: 30px;
     text-decoration: none !important;

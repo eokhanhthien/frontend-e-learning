@@ -7,7 +7,8 @@
                         <div><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
                         <div><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người
                                 dùng</router-link></div>
-                        <div>Thay đổi mật khẩu</div>
+                                <div><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
+
                     </div>
                 </div>
 
@@ -30,45 +31,47 @@
 
                                     </div>
                                     <input class="mt-3 form-control" type="file" name="image" ref="image" @change="selectFile">
-                                </div>
-                            <div class="col-6">
-                                <div class="row">
-                                    <div class="col-5">
+                            </div>
+                            <div class="col-9">
+                                <div class="row mt-3">
+                                    <div class="col-3">
                                         <p>Họ và tên</p>
                                     </div>
-                                    <div class="col-7"> <input class="form-control" type="text" v-model="username" >       <span class="message-validate">{{ errors.username }}</span> </div>
+                                    <div class="col-5"> <input class="form-control" type="text" v-model="username" > </div>
+                                    <div class="col-4"><div class="message-validate">{{ errors.username }}</div></div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-5">
+                                <div class="row mt-3">
+                                    <div class="col-3">
                                         <p>Email</p>
                                     </div>
-                                    <div class="col-7"> <input class="form-control" type="text" v-model="infoUserLogin.email" disabled> </div>
+                                    <div class="col-5"> <input class="form-control" type="text" v-model="infoUserLogin.email" disabled> </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-5">
+                                <div class="row mt-3">
+                                    <div class="col-3">
                                         <p>Ngày sinh</p>
                                     </div>
-                                    <div class="col-7"> <input class="form-control" type="date" v-model="infoUserLogin.birthday"> </div>
+                                    <div class="col-5"> <input class="form-control" type="date" v-model="infoUserLogin.birthday"> </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-5">
+                                <div class="row mt-3">
+                                    <div class="col-3">
                                         <p>Giới tính</p>
                                     </div>
-                                    <div class="col-7"> 
+                                    <div class="col-5"> 
                                         <select class="form-select" aria-label="Default select example" v-model="sex">
                                             <option selected>Chọn giới tính</option>
                                             <option value="Nam">Nam</option>
                                             <option value="Nữ">Nữ</option>
                                         </select> 
-                                        <span class="message-validate">{{ errors.sex }}</span>
+                                        
                                     </div>
+                                    <div class="col-4"><div class="message-validate">{{ errors.sex }}</div></div>
                                 </div>
 
                                 <div class="row mt-2">
-                                    <div class="col-5">
+                                    <div class="col-3">
                                         <p>Địa chỉ</p>
                                     </div>
-                                    <div class="col-7">
+                                    <div class="col-5">
 
                                         <!-- Chọn tỉnh thành -->
                                         <div>
@@ -100,11 +103,11 @@
                                     </div>
                                 </div>
 
-                                <div class="row mt-1">
-                                    <div class="col-5">
+                                <div class="row mt-3">
+                                    <div class="col-3">
                                         <p>Số điện thoại</p>
                                     </div>
-                                    <div class="col-7"> <input class="form-control" type="text" v-model="infoUserLogin.phonenumber"></div>
+                                    <div class="col-5"> <input class="form-control" type="text" v-model="infoUserLogin.phonenumber"></div>
                                 </div>
                          
                             <button class="btn btn-primary" type="submit" >Cập nhật</button>

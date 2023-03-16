@@ -13,6 +13,10 @@ const userApi = {
         // console.log(post);
         return axios.post('http://localhost:3000/api/user-frontend/changeinfo',  post )
     },
+    changepassword: async ( post ) => {
+        // console.log(post);
+        return axios.post('http://localhost:3000/api/user-frontend/changepassword',  post )
+    },
 
 }
 

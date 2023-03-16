@@ -8,6 +8,7 @@ import Lesson from "../components/frontend/Lesson.vue"
 import DetailLesson from "../components/frontend/DetailLesson.vue"
 import infoUser from "../components/frontend/infoUser.vue"
 import infoUserEdit from "../components/frontend/infoUserEdit.vue"
+import infoUserEditPass from "../components/frontend/infoChangePass.vue"
 import Error from "../components/frontend/Error.vue"
 
 
@@ -63,6 +64,7 @@ const routes = [
     { path: '/discussion', component:<UserLayout><Discussion /></UserLayout> ,  name: "Discussion"  ,props: true,},
     { path: '/info-user', component:<UserLayout><infoUser /></UserLayout> ,  name: "infoUser"  ,props: true,},
     { path: '/info-user-edit', component:<UserLayout><infoUserEdit /></UserLayout> ,  name: "infoUserEdit"  ,props: true,},
+    { path: '/info-user-edit-pass', component:<UserLayout><infoUserEditPass /></UserLayout> ,  name: "infoUserEditPass"  ,props: true,},
     { path: '/:pathMatch(.*)*', component: <Error />,  name:  Error ,props: true,},
 
 
