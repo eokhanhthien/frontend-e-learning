@@ -7,6 +7,10 @@ const frontendApi = {
         return axios.get('http://localhost:3000/api/course-frontend/'+id)
     },
 
+    getmycourse: async ({id})=>{
+        
+        return axios.get('http://localhost:3000/api/mycourse-frontend/'+id)
+    }
 }
 
 export default frontendApi

@@ -51,7 +51,7 @@
             <div v-if="is_Login == true">
                 <div v-if="isjoinCourse == true">
                     <div class="col col-12 p-0">
-                        <h3 class="title-block">Tất cả bài học</h3>
+                        <h3 class="title-block">Tất cả bài học ({{ lesson_data.length }})</h3>
                     </div>
 
                     <div class="courses">

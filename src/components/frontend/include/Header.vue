@@ -54,8 +54,8 @@
           <div class="col-2 drop_info"><i class="fa-solid fa-sort-down icon_drop_down"></i>
           <div class="dropdown_item">
             <p class="dropdown_item_border"><i class="fa-solid fa-user"></i> {{ infoUserLogin.name }}</p>
-            <p class="dropdown_item_border"><span> <router-link to="/info-user"><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</router-link></span> </p>
-            <p class="dropdown_item_border"><span><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</span></p>
+            <p class="dropdown_item_border"><span> <router-link class="custom-a" to="/info-user"><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</router-link></span> </p>
+            <p class="dropdown_item_border"><span> <router-link class="custom-a" to="/course-user"><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</router-link></span></p>
             <p class=""><span @click="handleLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</span> </p>
           </div>
           </div>
@@ -647,5 +647,9 @@ body::-webkit-scrollbar-thumb
 
 .dropdown_item a{
   text-decoration: none;
+}
+
+.custom-a{
+  color: #878787;
 }
 </style>

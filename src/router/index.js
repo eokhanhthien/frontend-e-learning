@@ -10,6 +10,7 @@ import infoUser from "../components/frontend/infoUser.vue"
 import infoUserEdit from "../components/frontend/infoUserEdit.vue"
 import infoUserEditPass from "../components/frontend/infoChangePass.vue"
 import Error from "../components/frontend/Error.vue"
+import CourseUser from "../components/frontend/Courseuser.vue"
 
 
 import CourseIndex from "../components/backend/course/index.vue"
@@ -65,6 +66,7 @@ const routes = [
     { path: '/info-user', component:<UserLayout><infoUser /></UserLayout> ,  name: "infoUser"  ,props: true,},
     { path: '/info-user-edit', component:<UserLayout><infoUserEdit /></UserLayout> ,  name: "infoUserEdit"  ,props: true,},
     { path: '/info-user-edit-pass', component:<UserLayout><infoUserEditPass /></UserLayout> ,  name: "infoUserEditPass"  ,props: true,},
+    { path: '/course-user', component:<UserLayout><CourseUser /></UserLayout> ,  name: "CourseUser"  ,props: true,},
     { path: '/:pathMatch(.*)*', component: <Error />,  name:  Error ,props: true,},
 
 
