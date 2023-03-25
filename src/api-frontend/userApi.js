@@ -18,6 +18,13 @@ const userApi = {
         return axios.post('http://localhost:3000/api/user-frontend/changepassword',  post )
     },
 
+    getUser: async (post) => {
+        return axios.post('http://localhost:3000/api/user-frontend/get-user', {
+            post
+        })
+    },
+
+
 }
 
 export default userApi

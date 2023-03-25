@@ -4,6 +4,7 @@
         <div class="tab-menu"><router-link to ="/language" id="tab-menu"> Ngôn ngữ lập trình </router-link></div>          
         <div class="tab-menu"><router-link to ="/course" id="tab-menu"> Khóa học </router-link></div>
         <div class="tab-menu"><router-link to ="/lab" id="tab-menu"> Bài học </router-link></div>
+        <div class="tab-menu"><router-link to ="/lecturers" id="tab-menu"> Giảng viên </router-link></div>
            
     </aside>
 </template>

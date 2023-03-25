@@ -224,7 +224,7 @@ img.img-banner {
     position: absolute;
     background-color: #ffffff;
     top: 0;
-    transform: translate(-300px, 0);
+    transform: translate(-310px, 0);
     bottom: 0;
     width: 100%;
     transition: 0.3s;

@@ -25,6 +25,10 @@ import LabIndex from "../components/backend/lab/index.vue"
 import LabAdd from "../components/backend/lab/add.vue"
 import LabEdit from "../components/backend/lab/edit.vue"
 
+import Lecturers from "../components/backend/lecturers/index.vue"
+import addLecturers from "../components/backend/lecturers/add.vue"
+
+
 import Login from "../components//backend/authen/login.vue"
 import Signup from "../components/backend/authen/signup.vue"
 
@@ -87,6 +91,10 @@ const routes = [
     { path: '/lab', component: <AdminLayout><LabIndex /></AdminLayout> ,  name: "LabIndex"  ,props: true,beforeEnter: requireAuth},
     { path: '/lab/add', component: <AdminLayout><LabAdd /></AdminLayout> ,  name:  "LabAdd" ,props: true,beforeEnter: requireAuth},
     { path: '/lab/edit/:id', component: <AdminLayout><LabEdit /></AdminLayout> ,  name:  "LabEdit" ,props: true,beforeEnter: requireAuth},
+
+    { path: '/lecturers', component:<AdminLayout><Lecturers /></AdminLayout> ,  name: "Lecturers"  ,props: true,},
+    { path: '/add-lecturers', component:<AdminLayout><addLecturers /></AdminLayout> ,  name: "addLecturers"  ,props: true,},
+
 
     { path: '/login', component: <Login /> ,  name:  "Login" ,props: true,beforeEnter: requireAuthLogin},
     { path: '/register', component: <Signup /> ,  name:  "Signup" ,props: true,beforeEnter: requireAuthLogin},

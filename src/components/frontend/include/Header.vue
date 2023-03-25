@@ -8,11 +8,11 @@
             <div class="row">
               <div class="col col-3">
                 <div class="logo-size">
-                  <img src="../../../assets/images/logo.png" alt="">
+                  <img src="../../../assets/images/logo-e-learning.png" alt="">
                 </div>
               </div>
               <div class="col col-9">
-                <div class="name-logo"><router-link to="/">Đại Học Cần Thơ </router-link> </div>
+                <div class="name-logo"><router-link to="/">E-learning PRO </router-link> </div>
               </div>
             </div>
           </div>
@@ -55,7 +55,8 @@
           <div class="dropdown_item">
             <p class="dropdown_item_border"><i class="fa-solid fa-user"></i> {{ infoUserLogin.name }}</p>
             <p class="dropdown_item_border"><span> <router-link class="custom-a" to="/info-user"><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</router-link></span> </p>
-            <p class="dropdown_item_border"><span> <router-link class="custom-a" to="/course-user"><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</router-link></span></p>
+            <p v-if="infoUserLogin.role == 3" class="dropdown_item_border"><span> <router-link class="custom-a" to="/course-user"><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</router-link></span></p>
+            <p v-if="infoUserLogin.role == 2" class="dropdown_item_border"><span> <router-link class="custom-a" to="/"><i class="fa-solid fa-clipboard-list"></i> Quản lý lớp học</router-link></span></p>
             <p class=""><span @click="handleLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</span> </p>
           </div>
           </div>
@@ -227,7 +228,7 @@ onMounted(() => {
   if (localStorage.getItem('tokenUser')) {
     isLogin.value = true;
     infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
-    // console.log(infoUserLogin.value)
+    console.log(infoUserLogin.value)
   } else {
     isLogin.value = false;
   }
@@ -271,7 +272,7 @@ const toast = inject('toast');
       post.value.password = '';
       Model_container.value.classList.remove('Model-container-active')
       Model_item.value.classList.remove('Model-active')
-      toast.success('Đăng ký thành công thành công');
+      toast.success('Đăng ký thành công');
     }
   } catch (error) {
       toast.error('Email đã tồn tại');
