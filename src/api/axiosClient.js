@@ -11,7 +11,7 @@ const axiosClient = axios.create({
 // Add a request interceptor
 axiosClient.interceptors.request.use(
   function(config) {
-    config.headers['x-auth-token'] = localStorage.getItem('token');
+    config.headers['x-auth-token'] = sessionStorage.getItem('token');
     return config;
   },
   function(error) {
@@ -27,8 +27,8 @@ axiosClient.interceptors.response.use(
   function(error) {
     if (error.response.status === 401 || error.response.status === 400) {
       
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
+        sessionStorage.removeItem('token')
+        sessionStorage.removeItem('user')
         window.location = "/login"
       
      

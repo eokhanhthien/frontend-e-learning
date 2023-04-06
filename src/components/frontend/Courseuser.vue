@@ -14,7 +14,7 @@
                 <div class="col col-3" v-for="(course,index) in courses" v-bind:key="index">
                     <div class="course-item">
                         <div class="img-size">
-                            <img v-if="course.image" class="thumnail_course" :src="require('../../assets/images/'+course.image )"  >
+                            <img v-if="course.image" class="thumnail_course" :src="course.image "  >
                 
                             <div class="img-size-view">
                                 <!-- <router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link> -->
@@ -53,7 +53,7 @@ const Imagebanner = ref();
 onMounted ( () =>{
     ( async function() {
         try {
-            infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+            infoUserLogin.value = JSON.parse(sessionStorage.getItem('user_nomal'))
             // console.log(infoUserLogin.value)
            const res = await frontendApi.getmycourse({id : infoUserLogin.value._id})
            console.log(res.data.data)

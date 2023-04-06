@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router"
 import UserLayout from '../layouts/UserLayout.vue'
 import AdminLayout from "../layouts/AdminLayout.vue"
+import ManagerclassLayout from "../layouts/ManagerclassLayout.vue"
 import Home from "../components/frontend/Home.vue"
 import Learning from "../components/frontend/Learning.vue"
 import Discussion from "../components/frontend/Discussion.vue"
@@ -11,6 +12,8 @@ import infoUserEdit from "../components/frontend/infoUserEdit.vue"
 import infoUserEditPass from "../components/frontend/infoChangePass.vue"
 import Error from "../components/frontend/Error.vue"
 import CourseUser from "../components/frontend/Courseuser.vue"
+import Managerclass from "../components/frontend/Managerclass.vue"
+import Createclass from "../components/frontend/Createclass.vue"
 
 
 import CourseIndex from "../components/backend/course/index.vue"
@@ -35,7 +38,7 @@ import Signup from "../components/backend/authen/signup.vue"
 
 // Kiem tra login phan ADMIN----------------------------------------------------------------------------
 const requireAuth = (to, from, next) => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (!token) {
       // next({
       //   path: '/login',
@@ -47,7 +50,7 @@ const requireAuth = (to, from, next) => {
   };
   // Danh cho trang login
   const requireAuthLogin = (to, from, next) => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token) {
       // next({
       //   path: '/login',
@@ -60,17 +63,46 @@ const requireAuth = (to, from, next) => {
 // --------------------------------------------------------------------------------------------------------
 
 
+// Kiem tra login phan STUDENT----------------------------------------------------------------------------
+const isStudent = (to, from, next) => {
+  const token = JSON.parse(sessionStorage.getItem('user_nomal'));
+  if (!token || token['role'] == "2") {
+    // next({
+    //   path: '/login',
+    // });
+    window.location = "/learning"
+  } else {
+    next();
+  }
+};
+
+const isUser = (to, from, next) => {
+  const token = JSON.parse(sessionStorage.getItem('user_nomal'));
+  if (!token) {
+    // next({
+    //   path: '/login',
+    // });
+    window.location = "/learning"
+  } else {
+    next();
+  }
+};
+
+// --------------------------------------------------------------------------------------------------------
+
 const routes = [
     // Frontend
     { path: '/', component: <UserLayout><Home /></UserLayout>,  name: "Home"  ,props: true,},
     { path: '/learning', component:<UserLayout> <Learning /></UserLayout>,  name: "Learning"  ,props: true,},
     { path: '/lesson/:id', component:<UserLayout> <Lesson /></UserLayout>,  name: "Lesson"  ,props: true,},
-    { path: '/detail-lesson/:id', component:<UserLayout> <DetailLesson /></UserLayout>,  name: "DetailLesson"  ,props: true,},
+    { path: '/detail-lesson/:id', component:<UserLayout> <DetailLesson /></UserLayout>,  name: "DetailLesson"  ,props: true},
     { path: '/discussion', component:<UserLayout><Discussion /></UserLayout> ,  name: "Discussion"  ,props: true,},
-    { path: '/info-user', component:<UserLayout><infoUser /></UserLayout> ,  name: "infoUser"  ,props: true,},
-    { path: '/info-user-edit', component:<UserLayout><infoUserEdit /></UserLayout> ,  name: "infoUserEdit"  ,props: true,},
-    { path: '/info-user-edit-pass', component:<UserLayout><infoUserEditPass /></UserLayout> ,  name: "infoUserEditPass"  ,props: true,},
-    { path: '/course-user', component:<UserLayout><CourseUser /></UserLayout> ,  name: "CourseUser"  ,props: true,},
+    { path: '/info-user', component:<UserLayout><infoUser /></UserLayout> ,  name: "infoUser"  ,props: true,beforeEnter: isUser},
+    { path: '/info-user-edit', component:<UserLayout><infoUserEdit /></UserLayout> ,  name: "infoUserEdit"  ,props: true,beforeEnter: isUser},
+    { path: '/info-user-edit-pass', component:<UserLayout><infoUserEditPass /></UserLayout> ,  name: "infoUserEditPass"  ,props: true,beforeEnter: isUser},
+    { path: '/course-user', component:<UserLayout><CourseUser /></UserLayout> ,  name: "CourseUser"  ,props: true,beforeEnter: isUser},
+    { path: '/manager-class', component:<UserLayout><ManagerclassLayout><Managerclass /></ManagerclassLayout></UserLayout> ,  name: "Managerclass"  ,props: true,},
+    { path: '/create-class', component:<UserLayout><ManagerclassLayout><Createclass /></ManagerclassLayout></UserLayout> ,  name: "Createclass"  ,props: true,},
     { path: '/:pathMatch(.*)*', component: <Error />,  name:  Error ,props: true,},
 
 

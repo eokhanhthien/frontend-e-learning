@@ -81,7 +81,7 @@
           // location.reload()
           const res = await labApi.getAll();
           courses.value = res.data.data;
-          toast.error('Xóa ngôn ngữ thành công');
+          toast.error('Xóa bài học thành công');
       }   
   
   }

@@ -34,12 +34,12 @@ import LeftPanel from "../components/backend/LeftPanel.vue"
 import { ref , onMounted} from "vue";
 const user_name = ref("");
 function handleLogout(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('user')
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user')
     location.reload();
 }
 onMounted(() => {
-  let objectString = localStorage.getItem("user");
+  let objectString = sessionStorage.getItem("user");
   let user_info = JSON.parse(objectString);
   user_name.value = user_info.name;
 }

@@ -39,13 +39,12 @@
                                                     <!-- <td> {{ lecturer._id }} </td> -->
                                                     <td> <span class="serial">{{ lecturer.name }}</span> </td>
                                                     <td> <span class="serial">{{ lecturer.email }}</span> </td>
-                                                    <td> <span class="serial">{{ lecturer.name }}</span> </td>
-                                                    <td> <span class="serial">{{ lecturer.name }}</span> </td>
+                                                    <td> <span class="serial">{{ lecturer.phonenumber }}</span> </td>
+                                                    <!-- <td> <span class="serial">{{ lecturer.name }}</span> </td> -->
                                
-                                                    <!-- <td>
-                                                        <span class="badge badge-warning"><router-link :to="'language/edit/' + language._id">Edit</router-link> </span>
-                                                        <span @click ="handleDeleteLanguage(language._id)" class="badge badge-complete ml-3">Delete</span>
-                                                    </td> -->
+                                                    <td>
+                                                        <span @click ="handleDeleteLecturer(lecturer._id)" class="badge badge-complete ml-3">Delete</span>
+                                                    </td>
                                                 </tr>
                                                
                                                 
@@ -88,19 +87,7 @@ onMounted(() => {
 
 // const route = useRoute();
 const toast = inject('toast');
-// async function handleDeleteLanguage(id){
-//     const res = await languageApi.delete({id: id})
-//     if(res){
-//         // location.reload()
-//         const res = await languageApi.getAll();
-//         languages.value = res.data.data;
-//         toast.error('Xóa ngôn ngữ thành công');
-//     }   
 
-// }
-
-
-// console.log(route.query.status);
 
 function convertDate(value) {
     const date = new Date(value);
@@ -109,29 +96,12 @@ function convertDate(value) {
     return result
 }
 
-</script>
-<!-- <script>
-import languageApi from '@/api/languageApi';
-export default {
-    data() {
-        return {
-            languages: []
-        }
-    },
-    methods: {
-        async fetchData() {
-            const res = await languageApi.getAll();
-            this.languages = res.data.data
-        },
-        handleClick() {
-            console.log(this.languages[0]._id)
-        }
-    },
-    created() {
-        this.fetchData()
-    }
+function handleDeleteLecturer(id) {
+  console.log(id);
 }
-</script> -->
+
+</script>
+
 
 <style scoped>
 .badge{

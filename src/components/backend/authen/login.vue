@@ -32,8 +32,8 @@ async function handleLogin(){
   console.log(user);
   const token = user.data.token;
   const user_info = user.data.user;
-  localStorage.setItem('token', token)
-  localStorage.setItem('user', JSON.stringify(user_info))
+  sessionStorage.setItem('token', token)
+  sessionStorage.setItem('user', JSON.stringify(user_info))
   try {
       router.push({ path: '/language' }).then(() => { 
       toast.success('Đăng nhập thành công'); })

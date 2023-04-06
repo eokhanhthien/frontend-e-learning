@@ -92,6 +92,7 @@ function convertDate(value) {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position-y: bottom;
+    animation:xuathien 1s;
 }
 
 h2.banner-text-title {

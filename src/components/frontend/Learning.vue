@@ -11,7 +11,7 @@
 
     <div class="container-xl">
         <div class="col col-12">
-            <h3 class="title-block">Kiến thức cơ sở</h3>
+            <h3 class="title-block">Khóa tự học</h3>
         </div>
 
         <div class="courses">
@@ -20,7 +20,7 @@
                 <div class="col col-3" v-for="(course,index) in courses" v-bind:key="index">
                     <div class="course-item">
                         <div class="img-size">
-                            <img class="thumnail_course" :src="require('../../assets/images/'+course.image )" aspect-ratio="2.75" >
+                            <img class="thumnail_course" :src="course.image" aspect-ratio="2.75" >
                             <div class="img-size-view">
                                 <!-- <router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link> -->
                                 <button class="glow-on-hover" type="button"><router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link></button>

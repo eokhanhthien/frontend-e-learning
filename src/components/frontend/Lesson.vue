@@ -59,13 +59,16 @@
                             <div v-for="(lesson, index) in lesson_data" :key="index" class="col col-3">
                                 <div class="course-item">
                                     <div class="img-size">
-                            <img class="thumnail_course" :src="require('../../assets/images/'+course_data.image )" aspect-ratio="2.75" >
-                            <div class="img-size-view">
-                                <!-- <router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link> -->
-                                <div class="btn btn-primary" type="button"><router-link :to="'/detail-lesson/'+lesson._id" class="a_link">Học bài</router-link></div>
-                            
-                            </div>
-                        </div>
+                                        <img class="thumnail_course"
+                                            :src="course_data.image" aspect-ratio="2.75">
+                                        <div class="img-size-view">
+                                            <!-- <router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link> -->
+                                            <div class="btn btn-primary" type="button"><router-link
+                                                    :to="'/detail-lesson/' + lesson._id" class="a_link">Học bài</router-link>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="course-info">
                                         <div class="course-item-name">Bài {{ index + 1 }}: {{ lesson.name }}</div>
                                         <p class="course-item-description"><strong>Khóa: </strong>{{ lesson.name_course }}
@@ -88,8 +91,8 @@
                             <img src="../../assets/images/join.jpg" alt="">
                         </div>
                         <div class="col-xl-6">
-                            <div @click="handleJoin" class="wrap">
-                                <button class="button">Tham gia</button>
+                            <div class="wrap">
+                                <button class="button" @click="handleJoin" >Tham gia</button>
                             </div>
                         </div>
                     </div>
@@ -112,7 +115,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, onMounted, computed, watch, inject } from "vue";
 import { useRoute } from 'vue-router'
 import lessonApi from '@/api-frontend/lessonApi';
 import courseApi from '@/api-frontend/courseApi';
@@ -150,7 +153,7 @@ onMounted(() => {
             lesson_data.value = lessonData.data.data
             // console.log(course_data.value)
             // console.log(lesson_data.value)
-            const info = JSON.parse(localStorage.getItem('user_nomal'))
+            const info = JSON.parse(sessionStorage.getItem('user_nomal'))
 
             // console.log(id.value);
             // console.log(info._id);
@@ -176,7 +179,7 @@ onMounted(() => {
 
 
 watch(is_Login, async (newValue, oldValue) => {
-    const info = JSON.parse(localStorage.getItem('user_nomal'))
+    const info = JSON.parse(sessionStorage.getItem('user_nomal'))
     if (newValue !== oldValue) {
         const joinCourse = await joinCourseApi.get_join_course({ id_user: info._id, id_course: id.value });
         // console.log(joinCourse.data.data)
@@ -196,20 +199,27 @@ function convertDate(value) {
     return result
 }
 
-async function handleJoin() {
-    const info = JSON.parse(localStorage.getItem('user_nomal'))
-    const joinCourse = await joinCourseApi.add_join_course({ id_user: info._id, id_course: id.value });
+const toast = inject('toast');
 
-    // gọi lại cho reload data
-    if (joinCourse) {
-        const joinCourse = await joinCourseApi.get_join_course({ id_user: info._id, id_course: id.value });
-        if (joinCourse.data.data) {
-            isjoinCourse.value = true;
+async function handleJoin() {
+    const info = JSON.parse(sessionStorage.getItem('user_nomal'))
+    if (info['role'] == '3') {
+        const joinCourse = await joinCourseApi.add_join_course({ id_user: info._id, id_course: id.value });
+
+        // gọi lại cho reload data
+        if (joinCourse) {
+            const joinCourse = await joinCourseApi.get_join_course({ id_user: info._id, id_course: id.value });
+            if (joinCourse.data.data) {
+                isjoinCourse.value = true;
+            }
+            else {
+                isjoinCourse.value = false;
+            }
         }
-        else {
-            isjoinCourse.value = false;
-        }
+    }else{
+        toast.error('Bạn không thể tham gia');
     }
+
 }
 </script>
 
@@ -224,6 +234,7 @@ img.img-banner-lesson {
     object-fit: cover;
     height: 100%;
     filter: brightness(0.90);
+    animation: xuathien 1s;
 }
 
 .text-banner-container {
@@ -376,12 +387,11 @@ button:focus::after {
     }
 
 }
-
 </style>
 
 <style scoped>
 .course-item:hover .img-size-view {
-    transform: translate(210px,-203%);
+    transform: translate(210px, -203%);
     /* opacity: 1; */
     cursor: pointer;
 }
@@ -390,7 +400,7 @@ button:focus::after {
     position: absolute;
     top: 115%;
     /* left: 78%; */
-    transform: translate(210px,0%);
+    transform: translate(210px, 0%);
     font-size: 23px;
     font-weight: 700;
     /* bottom: 94px; */

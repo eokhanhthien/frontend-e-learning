@@ -47,7 +47,7 @@
                                         <input type="file" name="image" ref="image" @change="selectFile">
                                         <!-- <p>{{ post.image }}</p> -->
                                         <hr>
-                                        <img v-if="post.image" :src="require('../../../assets/images/'+post.image)" style="width: 120px; border: 1px solid #ccc;margin: 10px 4px 10px 0;" >
+                                        <img v-if="post.image" :src="post.image" style="width: 120px; border: 1px solid #ccc;margin: 10px 4px 10px 0;" >
                                        
 
                                         <div class="form-group mt-3">

@@ -29,7 +29,7 @@
                                                     <td class="serial">{{index+1}}</td>
                                                     <td class="avatar">
                                                         <div class="round-img">
-                                                            <img :src="require('../../../assets/images/'+course.image )" aspect-ratio="2.75" >
+                                                            <img :src="course.image"  >
 
                                                         </div>
                                                     </td>

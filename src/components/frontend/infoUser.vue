@@ -4,9 +4,9 @@
                 <div class="row ">
                     <div class="col-xl-3 ">
                         <div class=" br-custom-item fixed-height">
-                        <div><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
-                        <div><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người dùng</router-link></div>
-                        <div><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
+                        <div class="tag-custom"><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
+                        <div class="tag-custom"><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người dùng</router-link></div>
+                        <div class="tag-custom"><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
 
                         </div>
                     </div>
@@ -19,7 +19,7 @@
                                 <div class="col-3">
                                     <p class="">Ảnh đại diện</p>
                                     <div v-if="infoUserLogin.image" class="img-size-info">
-                                        <img :src="require('../../assets/images/' + infoUserLogin.image)" alt="">
+                                        <img :src="infoUserLogin.image" alt="">
                                     </div>
                                     <div v-else  class="img-size-info">
                                         <img :src="require('../../assets/images/user-default.png')" alt="">
@@ -81,7 +81,7 @@ import { onMounted , ref} from "vue";
 const infoUserLogin = ref({});
 
 onMounted(()=>{
-    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+    infoUserLogin.value = JSON.parse(sessionStorage.getItem('user_nomal'))
     console.log(infoUserLogin.value)
 })
 
@@ -89,7 +89,7 @@ onMounted(()=>{
 
 <style >
 .br-custom{
-    background-color: #f5f4f4;
+    background-color: #fdfdfd;
 }
 
 .br-custom-item{
@@ -99,6 +99,7 @@ onMounted(()=>{
 
 .fixed-height{
     height: 600px;
+    box-shadow: rgb(189 189 189 / 2%) 0px 1px 3px 0px, rgb(181 185 189 / 15%) 0px 0px 0px 1px;
 }
 .title-info {
     font-size: 22px;
@@ -121,5 +122,9 @@ a.link-custom {
     font-weight: 600;
     line-height: 30px;
     text-decoration: none !important;
+}
+.tag-custom {
+    margin: 0 0 16px 0px;
+    border-bottom: 1px solid #ccc;
 }
 </style>

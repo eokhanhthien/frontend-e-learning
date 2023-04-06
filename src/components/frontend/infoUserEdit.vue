@@ -4,10 +4,10 @@
             <div class="row ">
                 <div class="col-xl-3 ">
                     <div class=" br-custom-item fixed-height">
-                        <div><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
-                        <div><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người
+                        <div class="tag-custom"><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
+                        <div class="tag-custom"><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người
                                 dùng</router-link></div>
-                                <div><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
+                                <div class="tag-custom"><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
 
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                             <div class="col-3">
                                     <p class="">Ảnh đại diện</p>
                                     <div v-if="infoUserLogin.image" class="img-size-info">
-                                        <img :src="require('../../assets/images/' + infoUserLogin.image)" alt="">
+                                        <img :src="infoUserLogin.image" alt="">
 
                                     </div>
                                     <div v-else  class="img-size-info">
@@ -180,7 +180,7 @@ const errors = { username: usernameError, sex: sexError };
 // });
 
 onMounted(()=>{
-    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+    infoUserLogin.value = JSON.parse(sessionStorage.getItem('user_nomal'))
 
 
 

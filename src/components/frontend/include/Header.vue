@@ -12,7 +12,7 @@
                 </div>
               </div>
               <div class="col col-9">
-                <div class="name-logo"><router-link to="/">E-learning PRO </router-link> </div>
+                <div class="name-logo"><router-link to="/">E-learning.PRO </router-link> </div>
               </div>
             </div>
           </div>
@@ -45,7 +45,7 @@
           </div>
           <div class="col-2 p-0">
             <div v-if="infoUserLogin.image" class="size-avatar">
-              <img :src="require('../../../assets/images/' + infoUserLogin.image)" alt="">
+              <img :src="infoUserLogin.image" alt="">
             </div>
             <div v-else class="size-avatar">
               <img :src="require('../../../assets/images/user-default.png')" alt="">
@@ -56,7 +56,7 @@
             <p class="dropdown_item_border"><i class="fa-solid fa-user"></i> {{ infoUserLogin.name }}</p>
             <p class="dropdown_item_border"><span> <router-link class="custom-a" to="/info-user"><i class="fa-solid fa-circle-info"></i> Thông tin cá nhân</router-link></span> </p>
             <p v-if="infoUserLogin.role == 3" class="dropdown_item_border"><span> <router-link class="custom-a" to="/course-user"><i class="fa-solid fa-clipboard-list"></i> Khóa học của bạn</router-link></span></p>
-            <p v-if="infoUserLogin.role == 2" class="dropdown_item_border"><span> <router-link class="custom-a" to="/"><i class="fa-solid fa-clipboard-list"></i> Quản lý lớp học</router-link></span></p>
+            <p v-if="infoUserLogin.role == 2" class="dropdown_item_border"><span> <router-link class="custom-a" to="/manager-class"><i class="fa-solid fa-clipboard-list"></i> Quản lý lớp học</router-link></span></p>
             <p class=""><span @click="handleLogout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất</span> </p>
           </div>
           </div>
@@ -182,7 +182,7 @@ const post = ref({
   name: '',
   email: '',
   password: '',
-  image: 'user-default.png',
+  image: 'https://res.cloudinary.com/do6gi72zf/image/upload/v1680515154/eLearning/user-default_fkzpb9.png',
   city:'Chưa cập nhật',
   district:'Chưa cập nhật',
   ward:'Chưa cập nhật',
@@ -225,9 +225,9 @@ onMounted(() => {
 
 
   //hàm lưu token nên ở đây mới có dữ liệu
-  if (localStorage.getItem('tokenUser')) {
+  if (sessionStorage.getItem('tokenUser')) {
     isLogin.value = true;
-    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+    infoUserLogin.value = JSON.parse(sessionStorage.getItem('user_nomal'))
     console.log(infoUserLogin.value)
   } else {
     isLogin.value = false;
@@ -291,13 +291,13 @@ async function handleLogin() {
     // console.log(user);
     const token = user.data.token;
     const user_info = user.data.user;
-    localStorage.setItem('tokenUser', token)
-    localStorage.setItem('user_nomal', JSON.stringify(user_info))
+    sessionStorage.setItem('tokenUser', token)
+    sessionStorage.setItem('user_nomal', JSON.stringify(user_info))
     Model_container.value.classList.remove('Model-container-active')
     Model_item.value.classList.remove('Model-active')
-    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+    infoUserLogin.value = JSON.parse(sessionStorage.getItem('user_nomal'))
     store.onLogin(true)
-    toast.success('Đăng nhập thành công thành công');
+    toast.success('Đăng nhập thành công');
   } catch (error) {
     toast.error('Sai thông tin đăng nhập');
   }
@@ -307,10 +307,11 @@ async function handleLogin() {
 function handleLogout() {
   infoUser.value.email = '';
   infoUser.value.password = '';
-  localStorage.removeItem('tokenUser')
-  localStorage.removeItem('user_nomal')
+  sessionStorage.removeItem('tokenUser')
+  sessionStorage.removeItem('user_nomal')
   store.onLogin(false)
-  toast.success('Đăng xuất thành công thành công');
+  location.reload()
+  toast.success('Đăng xuất thành công');
   // location.reload();
 }
 
@@ -652,5 +653,13 @@ body::-webkit-scrollbar-thumb
 
 .custom-a{
   color: #878787;
+}
+@keyframes xuathien {
+  from{
+    opacity: 0.6;
+  }
+  to{
+    opacity: 1;
+  }
 }
 </style>

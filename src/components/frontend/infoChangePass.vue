@@ -4,9 +4,9 @@
               <div class="row ">
                   <div class="col-xl-3 ">
                       <div class=" br-custom-item fixed-height">
-                      <div><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
-                      <div><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người dùng</router-link></div>
-                      <div><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
+                      <div class="tag-custom"><router-link class="link-custom" to="/info-user"> Thông tin & Liên hệ</router-link></div>
+                      <div class="tag-custom"><router-link class="link-custom" to="/info-user-edit"> Thay đổi thông tin người dùng</router-link></div>
+                      <div class="tag-custom"><router-link class="link-custom" to="/info-user-edit-pass"> Thay đổi mật khẩu</router-link></div>
                       </div>
                   </div>
                   <div class="col-xl-9 ">
@@ -57,7 +57,7 @@ const toast = inject('toast');
 const infoUserLogin = ref({});
 
 onMounted(()=>{
-    infoUserLogin.value = JSON.parse(localStorage.getItem('user_nomal'))
+    infoUserLogin.value = JSON.parse(sessionStorage.getItem('user_nomal'))
     // comfirmPassword.value = '';
     console.log(infoUserLogin.value)
 })

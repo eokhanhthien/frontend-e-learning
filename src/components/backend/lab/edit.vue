@@ -57,7 +57,7 @@
                                                 <div v-if="postLabDetail.image">
                                                     <img v-for="(image, index) in postLabDetail.image"
                                                         v-bind:key="index"
-                                                        :src="require('../../../assets/images/' + image)"
+                                                        :src="image"
                                                         style="width: 120px; border: 1px solid #ccc;margin: 10px 4px 10px 0;">
                                                 </div>
                                             </div>
@@ -182,7 +182,14 @@ async function submitForm() {
         const fileBlob = new Blob([file.value[index]], { type: 'image/jpeg' });
         formData.append("image", fileBlob, index + 1);
     }
-    formData.append("old_image", postLabDetail.value.image);
+    if(postLabDetail.value.length > 1){
+        for (let index = 0; index < postLabDetail.value.length; index++) { //NEW ONE
+        const fileBlob = new Blob([postLabDetail.value[index]], { type: 'image/jpeg' });
+        formData.append("old_image", fileBlob, index + 1);
+    } 
+    }else{
+        formData.append("old_image", postLabDetail.value.image);
+    }
     formData.append("name", postLab.value.name);
     formData.append("name_course", postLab.value.name_course);
     formData.append("description", postLabDetail.value.description);
