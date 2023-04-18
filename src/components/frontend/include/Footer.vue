@@ -3,7 +3,8 @@
     <div class="container-xl pt-4 pb-4">
     <div class="row">
         <div class="col-3 border-footer">
-            <div><img src="../.././../assets/images/logofooter.png" alt=""></div>
+            <!-- <div><img src="../.././../assets/images/logofooter.png" alt=""></div> -->
+            <h2 class="footer-title">ĐỊA CHỈ</h2>
             <div class="footer-text"><i class="fa-solid fa-location-dot"></i> Khu 2, Đ. 3/2, P. Xuân Khánh, Q. Ninh Kiều, TP. CT</div>
             <div class="footer-text"><i class="fa-solid fa-phone"></i> ĐT: +84292 3832 663</div>
             <div class="footer-text"><i class="fa-solid fa-fax"></i> Fax: +84292 3838 474</div>

@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Thêm ngôn ngữ</strong>
+                            <strong class="card-title">Thêm lĩnh vực</strong>
                         </div>
                         <div class="card-body">
 
@@ -15,7 +15,7 @@
                                 <div class="card-body">
                                     <hr>
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Tên ngôn ngữ </label>
+                                        <label for="cc-payment" class="control-label mb-1">Tên lĩnh vực </label>
                                         <input v-model="languages" type="text" class="form-control">
                                     </div>
 
@@ -67,7 +67,7 @@ async function handleEditLanguage() {
     if(res){
         router.push({ path: '/language',
         query: {  } }).then(() => { 
-        toast.info('Sửa ngôn ngữ thành công'); }) 
+        toast.info('Sửa lĩnh vực thành công'); }) 
         
     }   
    

@@ -18,7 +18,7 @@
             <div class="row">
 
                 <div class="col col-3" v-for="(course,index) in courses" v-bind:key="index">
-                    <div class="course-item">
+                    <div  class="course-item">
                         <div class="img-size">
                             <img class="thumnail_course" :src="course.image" aspect-ratio="2.75" >
                             <div class="img-size-view">
@@ -48,66 +48,32 @@
 
 
         <div class="col col-12">
-            <h3 class="title-block">Lập trình cơ sở</h3>
+            <h3 class="title-block">Khóa học nâng cao</h3>
         </div>
         <div class="courses">
             <div class="row">
-                <div class="col col-3">
-                    <div class="course-item">
+                <div class="col col-3" v-for="(course,index) in coursesAdvance" v-bind:key="index">
+                    <div  class="course-item">
                         <div class="img-size">
-                            <img src="../../assets/images/h1.jpg" alt="">
+                            <img class="thumnail_course" :src="course.image" aspect-ratio="2.75" >
+                            <div class="img-size-view">
+                                <!-- <router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link> -->
+                                <button class="glow-on-hover" type="button"><router-link :to="'lesson/'+course._id" class="a_link">Tham gia</router-link></button>
+                            
+                            </div>
                         </div>
                         <div class="course-info">
-                            <div class="course-item-name">Lập trình hướng đối tượng trong C++</div>
-                            <p class="course-item-description">Lập trình hướng đối tượng (Object-Oriented-Programming) là phương pháp lập trình dự</p>
+                            <div class="course-item-name">{{ course.name }}</div>
+                            <p class="course-item-description">{{ course.description }}</p>
+                        <div class="course-info-nav">
+                            <p> <strong>Tên khóa học: </strong>  {{ course.name }}</p>
+                            <!-- <p> <strong>Mô tả: </strong>  {{ course.description }}</p> -->
+                            <!-- <img class="logo_course" :src="require('../../assets/images/logo_'+course.name_language+'.jpg' )" >  -->
+                            <p> <img src="../../assets/images/language.png" alt=""> <strong>Lĩnh vực: </strong><strong>{{ course.name_language }} </strong> </p>
+                            <p> <img src="../../assets/images/icon_level.png" alt=""> <strong>Cấp độ: </strong>  {{ course.level }}</p>
+                            <p> <img src="../../assets/images/icon_people.png" alt=""> <strong>Đối tượng: </strong> mọi người </p>
+                            <p> <img src="../../assets/images/icon_online.png" alt=""> <strong>Hình thức: </strong> online  </p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="col col-3">
-                    <div class="course-item">
-                        <div class="img-size">
-                            <img src="../../assets/images/h1.jpg" alt="">
-                        </div>
-                        <div class="course-info">
-                            <div class="course-item-name">Lập trình hướng đối tượng trong C++</div>
-                            <p class="course-item-description">Lập trình hướng đối tượng (Object-Oriented-Programming) là phương pháp lập trình dự</p>
-                        </div>
-                    </div>
-                </div>                
-                
-                <div class="col col-3">
-                    <div class="course-item">
-                        <div class="img-size">
-                            <img src="../../assets/images/h1.jpg" alt="">
-                        </div>
-                        <div class="course-info">
-                            <div class="course-item-name">Lập trình hướng đối tượng trong C++</div>
-                            <p class="course-item-description">Lập trình hướng đối tượng (Object-Oriented-Programming) là phương pháp lập trình dự</p>
-                        </div>
-                    </div>
-                </div>                
-                
-                <div class="col col-3">
-                    <div class="course-item">
-                        <div class="img-size">
-                            <img src="../../assets/images/h1.jpg" alt="">
-                        </div>
-                        <div class="course-info">
-                            <div class="course-item-name">Lập trình hướng đối tượng trong C++</div>
-                            <p class="course-item-description">Lập trình hướng đối tượng (Object-Oriented-Programming) là phương pháp lập trình dự</p>
-                        </div>
-                    </div>
-                </div>                
-                
-                <div class="col col-3">
-                    <div class="course-item">
-                        <div class="img-size">
-                            <img src="../../assets/images/h1.jpg" alt="">
-                        </div>
-                        <div class="course-info">
-                            <div class="course-item-name">Lập trình hướng đối tượng trong C++</div>
-                            <p class="course-item-description">Lập trình hướng đối tượng (Object-Oriented-Programming) là phương pháp lập trình dự</p>
                         </div>
                     </div>
                 </div>
@@ -126,13 +92,22 @@ import frontendApi from '@/api-frontend/courseApi';
 
 
 const courses = ref([]);
+const coursesAdvance = ref([]);
 onMounted(() => {
     (async function () {
         const res = await frontendApi.getAll();
         // console.log(res.data.data)
-        courses.value = res.data.data;
+        res.data.data.forEach(item => {
+            if(item.level == "basic"){
+                courses.value.push(item)
+            }
+            else if(item.level == "advanced"){
+                coursesAdvance.value.push(item)
+            }
+        });
+        // courses.value = res.data.data;
         // console.log(courses.value)
-
+        // console.log(courses.value)
     })()
 })
 

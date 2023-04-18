@@ -2,20 +2,20 @@
     <div>
         <div class="content">
             <div class="animated fadeIn">
-                <button class="btn-add btn btn-primary"> <router-link to="/language/add">Thêm ngôn ngữ</router-link>
+                <button class="btn-add btn btn-primary"> <router-link to="/language/add">Thêm lĩnh vực</router-link>
                 </button>
                 <!-- <ul>
                     <li v-for="language in languages" v-bind:key="language._id">{{ language.name }}</li>
                 </ul> -->
                 <div class="orders">
-                    <!-- <p v-if="route.query.status == 1" class="Notify">Thêm ngôn ngữ thành công</p>
-                    <p v-if="route.query.status == 2" class="Notify">Xóa ngôn ngữ thành công</p>
-                    <p v-if="route.query.status == 3" class="Notify">Sửa ngôn ngữ thành công</p> -->
+                    <!-- <p v-if="route.query.status == 1" class="Notify">Thêm lĩnh vực thành công</p>
+                    <p v-if="route.query.status == 2" class="Notify">Xóa lĩnh vực thành công</p>
+                    <p v-if="route.query.status == 3" class="Notify">Sửa lĩnh vực thành công</p> -->
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h4 class="box-title">Tất cả ngôn ngữ</h4>
+                                    <h4 class="box-title">Tất cả lĩnh vực</h4>
                                 </div>
                                 <div class="card-body--">
                                     <div class="table-stats order-table ov-h">
@@ -88,7 +88,7 @@ async function handleDeleteLanguage(id){
         // location.reload()
         const res = await languageApi.getAll();
         languages.value = res.data.data;
-        toast.error('Xóa ngôn ngữ thành công');
+        toast.error('Xóa lĩnh vực thành công');
     }   
 
 }

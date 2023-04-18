@@ -20,13 +20,12 @@
 
                                     <form ref="form" @submit.prevent="submitForm" enctype="multipart/form-data">
                                         <div class="form-group">
-                                            <div class=""><label for="select" class=" form-control-label">Ngôn
-                                                    ngữ</label>
+                                            <div class=""><label for="select" class=" form-control-label">Lĩnh vực</label>
                                             </div>
                                             <div class="">
                                                 <select name="select" id="select" class="form-control"
                                                     v-model="selected" @change="onChange($event)">
-                                                    <option value="">Chọn ngôn ngữ</option>
+                                                    <option value="">Chọn lĩnh vực</option>
                                                     <option v-for="(language) in languages" v-bind:key="language.name"
                                                         :value="{ id: language._id, name: language.name }">{{
                                                             language.name

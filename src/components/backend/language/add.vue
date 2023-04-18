@@ -7,7 +7,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <strong class="card-title">Thêm ngôn ngữ</strong>
+                            <strong class="card-title">Thêm lĩnh vực</strong>
                         </div> 
                         <div class="card-body">
 
@@ -15,7 +15,7 @@
                                 <div class="card-body">
                                     <hr>
                                     <div class="form-group">
-                                        <label for="cc-payment" class="control-label mb-1">Tên ngôn ngữ</label>
+                                        <label for="cc-payment" class="control-label mb-1">Tên lĩnh vực</label>
                                         <input v-model="inputLanguage" type="text" class="form-control" >
                                     </div>
 
@@ -56,7 +56,7 @@ async function handleAddLanguage() {
     if(res){
         // window.history.back();
         router.push({ path: '/language' }).then(() => { 
-        toast.success('Thêm ngôn ngữ thành công'); })
+        toast.success('Thêm lĩnh vực thành công'); })
     }   
     
 

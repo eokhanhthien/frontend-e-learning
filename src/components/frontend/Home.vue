@@ -12,7 +12,7 @@
       <div class="col-2"><img src="https://res.cloudinary.com/do6gi72zf/image/upload/v1680769077/eLearning/3_edpo2z.png" alt=""></div>
     </div>
     
-    <div class="row mt-3">
+    <div class="row mg-custom2">
       <div class="col-12">
         <div class="text-center title-home">
             Programming is the in-demand skill for the future
@@ -45,6 +45,36 @@
         </div>
       </div>
     </div>
+
+    <div class="row mg-custom2">
+      <div class="col-12">
+        <div class="text-center title-home">
+          Roadmap to become a programmer
+        </div>
+      </div>
+    </div>
+
+    <div class="row mg-custom2">
+      <div class="col-4"><div class="item-img"><img src="https://res.cloudinary.com/do6gi72zf/image/upload/v1680792651/eLearning/thi-lap-trinh_dkvtht.png" alt=""></div> 
+      <div class="item-info-text text-center mt-3">
+          Roadmap to become a programmer
+        </div>
+        <p class="text-center">Start learning with a wide range of basic to advanced courses created by top experts.</p>
+    </div>
+    <div class="col-4"><div class="item-img"><img src="https://res.cloudinary.com/do6gi72zf/image/upload/v1680794220/eLearning/hoc-lap-trinh_rf30sh.png" alt=""></div> 
+      <div class="item-info-text text-center mt-3">
+          Roadmap to become a programmer
+        </div>
+        <p class="text-center">Start learning with a wide range of basic to advanced courses created by top experts.</p>
+    </div>
+    <div class="col-4"><div class="item-img"><img src="https://res.cloudinary.com/do6gi72zf/image/upload/v1680794226/eLearning/luyen-lap-trinh_fanoxn.png" alt=""></div> 
+      <div class="item-info-text text-center mt-3">
+          Roadmap to become a programmer
+        </div>
+        <p class="text-center">Start learning with a wide range of basic to advanced courses created by top experts.</p>
+    </div>
+    </div>
+
   </div>
 
   
@@ -74,5 +104,20 @@ export default {
     font-weight: 600;
     color: #1e266d;
 
+}
+.item-img {
+    align-items: center;
+    /* padding: 64px; */
+    border: 1px solid #fff;
+    box-shadow: 0 0 20px 0 rgba(29,31,89,.1);
+    border-radius: 8px;
+    transition: 0.3s;
+}
+.item-img img {
+  display: block;
+    margin: 0 auto;
+}
+.item-img:hover{
+  transform: scale(1.05);
 }
 </style>
